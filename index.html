@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>SoundSync</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════
+   BASE (dark default)
+═══════════════════════════════ */
+:root{
+  --bg:#0a0a0a;--surface:#111;--surface2:#1a1a1a;
+  --border:#222;--border2:#2a2a2a;
+  --text:#f0f0f0;--text-muted:#666;--text-dim:#444;
+  --accent:#ff5500;--accent-dim:rgba(255,85,0,.12);
+  --green:#00c853;--radius:8px;
+  --card-shadow:none;
+  --btn-bg:var(--surface2);--btn-border:var(--border2);--btn-color:var(--text);
+  --btn-primary-bg:var(--accent);--btn-primary-color:#fff;
+  --input-bg:var(--surface2);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+
+/* ═══════════════════════════════
+   LIGHT THEME
+═══════════════════════════════ */
+html[data-theme="light"]{
+  --bg:#f2f2f2;--surface:#fff;--surface2:#f5f5f5;
+  --border:#e0e0e0;--border2:#d4d4d4;
+  --text:#111;--text-muted:#888;--text-dim:#bbb;
+  --accent:#ff5500;--accent-dim:rgba(255,85,0,.1);
+  --green:#00a040;
+  --btn-bg:#fff;--btn-border:#d0d0d0;--btn-color:#222;
+  --input-bg:#fff;
+}
+
+/* ═══════════════════════════════
+   AERO THEME (Windows 7 glass)
+═══════════════════════════════ */
+html[data-theme="aero"]{
+  --bg:transparent;
+  --surface:rgba(200,225,255,0.18);
+  --surface2:rgba(170,210,255,0.13);
+  --border:rgba(255,255,255,0.30);
+  --border2:rgba(255,255,255,0.18);
+  --text:#fff;--text-muted:rgba(255,255,255,0.6);--text-dim:rgba(255,255,255,0.3);
+  --accent:#60b8ff;--accent-dim:rgba(96,184,255,0.15);
+  --green:#50ffa0;--radius:10px;
+  --card-shadow:0 8px 32px rgba(0,30,120,0.45),inset 0 1px 0 rgba(255,255,255,0.55),inset 0 -1px 0 rgba(0,50,180,0.25);
+  --btn-bg:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(180,215,255,.35) 48%,rgba(110,175,255,.45) 100%);
+  --btn-border:rgba(255,255,255,0.6);--btn-color:#002d6a;
+  --btn-primary-bg:linear-gradient(180deg,#6ac0ff 0%,#1a70e8 48%,#0050c0 100%);
+  --btn-primary-color:#fff;
+  --input-bg:rgba(0,20,80,0.35);
+}
+html[data-theme="aero"] body{
+  background:linear-gradient(160deg,#1a6acf 0%,#0c3e88 45%,#061d4a 100%) fixed;
+  min-height:100vh;
+}
+html[data-theme="aero"] .topbar,
+html[data-theme="aero"] .splash-card,
+html[data-theme="aero"] .player-card,
+html[data-theme="aero"] .right-panel,
+html[data-theme="aero"] .settings-modal-inner,
+html[data-theme="aero"] .perm-modal-inner,
+html[data-theme="aero"] .gif-panel{
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  background:rgba(160,205,255,0.16);
+  border:1px solid rgba(255,255,255,0.35);
+  box-shadow:var(--card-shadow);
+}
+html[data-theme="aero"] .topbar{
+  background:linear-gradient(180deg,rgba(200,225,255,0.28) 0%,rgba(120,180,255,0.18) 100%);
+  border-bottom:1px solid rgba(255,255,255,0.3);
+}
+html[data-theme="aero"] .ctrl-btn,
+html[data-theme="aero"] .btn-secondary,
+html[data-theme="aero"] .q-btn,
+html[data-theme="aero"] .chat-send,
+html[data-theme="aero"] .rx-btn,
+html[data-theme="aero"] .chat-toggle-btn{
+  background:var(--btn-bg);
+  border:1px solid var(--btn-border);
+  box-shadow:0 2px 6px rgba(0,20,80,.35),inset 0 1px 0 rgba(255,255,255,.8);
+  border-radius:7px;
+  color:var(--btn-color);
+}
+html[data-theme="aero"] .ctrl-btn.pp,
+html[data-theme="aero"] .btn-primary,
+html[data-theme="aero"] .chat-send{
+  background:var(--btn-primary-bg);
+  border:1px solid rgba(255,255,255,.4);
+  box-shadow:0 2px 8px rgba(0,30,120,.5),inset 0 1px 0 rgba(255,255,255,.55);
+  color:#fff;
+}
+html[data-theme="aero"] input[type="text"]{
+  background:var(--input-bg);
+  border:1px solid rgba(255,255,255,0.25);
+  color:#fff;
+  box-shadow:inset 0 1px 3px rgba(0,20,80,.4);
+}
+html[data-theme="aero"] input[type="text"]::placeholder{color:rgba(255,255,255,.35)}
+
+/* ═══════════════════════════════
+   SUNDAY MORNING (iOS 6 skeuomorphic)
+═══════════════════════════════ */
+html[data-theme="sunday"]{
+  --bg:#ddd4c4;
+  --surface:rgba(255,252,245,0.94);
+  --surface2:rgba(245,240,230,0.92);
+  --border:#c8bba8;--border2:#bfb09a;
+  --text:#2a1e10;--text-muted:#8a7060;--text-dim:#c0a890;
+  --accent:#d95e20;--accent-dim:rgba(217,94,32,.12);
+  --green:#5a9a35;--radius:12px;
+  --card-shadow:0 4px 16px rgba(100,70,40,.18),inset 0 1px 0 rgba(255,255,255,.95),0 1px 0 rgba(170,140,100,.4);
+  --btn-bg:linear-gradient(180deg,#f8f4ec 0%,#e8ddd0 50%,#d8cdbf 100%);
+  --btn-border:#b8a890;--btn-color:#3a2510;
+  --btn-primary-bg:linear-gradient(180deg,#f0894a 0%,#d95e20 50%,#b84010 100%);
+  --btn-primary-color:#fff;
+  --input-bg:#fffef8;
+}
+html[data-theme="sunday"] body{
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 23px,rgba(160,140,110,.07) 23px,rgba(160,140,110,.07) 24px),
+    repeating-linear-gradient(90deg,transparent,transparent 23px,rgba(160,140,110,.05) 23px,rgba(160,140,110,.05) 24px),
+    linear-gradient(150deg,#ede0cd 0%,#d4c8b0 100%) fixed;
+  min-height:100vh;
+}
+html[data-theme="sunday"] .topbar{
+  background:linear-gradient(180deg,#f4ece0 0%,#e4d8c8 100%);
+  border-bottom:1px solid #c8b898;
+  box-shadow:0 1px 0 rgba(255,255,255,.8),0 2px 4px rgba(100,70,40,.1);
+}
+html[data-theme="sunday"] .player-card,
+html[data-theme="sunday"] .right-panel,
+html[data-theme="sunday"] .splash-card,
+html[data-theme="sunday"] .settings-modal-inner,
+html[data-theme="sunday"] .perm-modal-inner,
+html[data-theme="sunday"] .gif-panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:var(--card-shadow);
+}
+html[data-theme="sunday"] .ctrl-btn,
+html[data-theme="sunday"] .btn-secondary,
+html[data-theme="sunday"] .rx-btn,
+html[data-theme="sunday"] .chat-toggle-btn{
+  background:var(--btn-bg);
+  border:1px solid var(--btn-border);
+  box-shadow:0 2px 4px rgba(80,50,20,.2),inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(140,100,60,.2);
+  color:var(--btn-color);
+  border-radius:9px;
+}
+html[data-theme="sunday"] .ctrl-btn.pp,
+html[data-theme="sunday"] .btn-primary,
+html[data-theme="sunday"] .chat-send{
+  background:var(--btn-primary-bg);
+  border:1px solid #a03010;
+  box-shadow:0 2px 4px rgba(100,40,10,.4),inset 0 1px 0 rgba(255,180,130,.55);
+  color:#fff;border-radius:9px;
+}
+html[data-theme="sunday"] input[type="text"]{
+  background:var(--input-bg);
+  border:1px solid var(--border);
+  color:var(--text);
+  box-shadow:inset 0 1px 3px rgba(120,90,50,.15);
+}
+html[data-theme="sunday"] .logo-dot,
+html[data-theme="sunday"] .np-dot{background:var(--accent)}
+
+/* ═══════════════════════════════
+   BROOTAL THEME (HotTopic 2003 energy)
+═══════════════════════════════ */
+html[data-theme="brootal"]{
+  --bg:#050000;
+  --surface:#0d0000;
+  --surface2:#160000;
+  --border:#2e0000;--border2:#3a0000;
+  --text:#f0dada;--text-muted:#8a4444;--text-dim:#3a1a1a;
+  --accent:#cc0000;--accent-dim:rgba(200,0,0,.12);
+  --green:#aa1111;--radius:2px;
+  --card-shadow:0 0 18px rgba(160,0,0,.15),inset 0 0 40px rgba(80,0,0,.08);
+  --btn-bg:linear-gradient(180deg,#200000 0%,#130000 100%);
+  --btn-border:#550000;--btn-color:#cc6666;
+  --btn-primary-bg:linear-gradient(180deg,#ff1111 0%,#aa0000 50%,#880000 100%);
+  --btn-primary-color:#fff;
+  --input-bg:#0d0000;
+}
+html[data-theme="brootal"] body{
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%,rgba(100,0,0,.3) 0%,transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cline x1='150' y1='0' x2='300' y2='150' stroke='rgba(80,0,0,0.12)' stroke-width='0.5'/%3E%3Cline x1='150' y1='0' x2='0' y2='150' stroke='rgba(80,0,0,0.12)' stroke-width='0.5'/%3E%3Cline x1='300' y1='150' x2='150' y2='300' stroke='rgba(80,0,0,0.12)' stroke-width='0.5'/%3E%3Cline x1='0' y1='150' x2='150' y2='300' stroke='rgba(80,0,0,0.12)' stroke-width='0.5'/%3E%3Ccircle cx='150' cy='150' r='100' fill='none' stroke='rgba(80,0,0,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='150' cy='150' r='60' fill='none' stroke='rgba(80,0,0,0.06)' stroke-width='0.5'/%3E%3Cline x1='50' y1='0' x2='150' y2='100' stroke='rgba(80,0,0,0.07)' stroke-width='0.5'/%3E%3Cline x1='250' y1='0' x2='150' y2='100' stroke='rgba(80,0,0,0.07)' stroke-width='0.5'/%3E%3Cline x1='0' y1='50' x2='100' y2='150' stroke='rgba(80,0,0,0.07)' stroke-width='0.5'/%3E%3Cline x1='300' y1='50' x2='200' y2='150' stroke='rgba(80,0,0,0.07)' stroke-width='0.5'/%3E%3C/svg%3E") repeat,
+    #050000;
+  min-height:100vh;
+}
+html[data-theme="brootal"] .topbar{
+  background:linear-gradient(180deg,#160000 0%,#0a0000 100%);
+  border-bottom:2px solid #3a0000;
+  box-shadow:0 2px 20px rgba(180,0,0,.2);
+}
+html[data-theme="brootal"] .topbar-logo{
+  letter-spacing:.35em;text-shadow:0 0 12px rgba(200,0,0,.6);
+  font-family:Impact,'Arial Narrow',sans-serif;
+}
+html[data-theme="brootal"] .section-label{
+  letter-spacing:.3em;text-shadow:0 0 8px rgba(160,0,0,.4);
+}
+html[data-theme="brootal"] .player-card,
+html[data-theme="brootal"] .right-panel{
+  border:1px solid #2e0000;
+  box-shadow:var(--card-shadow);
+}
+html[data-theme="brootal"] .splash-card,
+html[data-theme="brootal"] .settings-modal-inner,
+html[data-theme="brootal"] .perm-modal-inner,
+html[data-theme="brootal"] .gif-panel{
+  border:1px solid #3a0000;
+  background:rgba(12,0,0,.95);
+}
+html[data-theme="brootal"] .ctrl-btn{
+  background:var(--btn-bg);
+  border:1px solid var(--btn-border);
+  color:var(--btn-color);
+}
+html[data-theme="brootal"] .ctrl-btn:hover{
+  border-color:#cc0000;color:#ff4444;
+  box-shadow:0 0 10px rgba(180,0,0,.4);
+}
+html[data-theme="brootal"] .ctrl-btn.pp,
+html[data-theme="brootal"] .btn-primary{
+  background:var(--btn-primary-bg);
+  border:1px solid #ff4444;
+  box-shadow:0 0 14px rgba(200,0,0,.5),inset 0 1px 0 rgba(255,100,100,.3);
+  color:#fff;
+}
+html[data-theme="brootal"] .btn-secondary{
+  background:var(--btn-bg);
+  border:1px solid var(--btn-border);
+  color:var(--btn-color);
+}
+html[data-theme="brootal"] .btn-secondary:hover{
+  border-color:#cc0000;color:#ff4444;
+}
+html[data-theme="brootal"] input[type="text"]{
+  background:var(--input-bg);
+  border:1px solid var(--border);color:var(--text);
+}
+html[data-theme="brootal"] .now-playing-bar,
+html[data-theme="brootal"] .controls,
+html[data-theme="brootal"] .listener-bar,
+html[data-theme="brootal"] .panel-tab,
+html[data-theme="brootal"] .chat-input-row,
+html[data-theme="brootal"] .reactions-bar{
+  border-color:#2e0000;
+}
+html[data-theme="brootal"] .queue-item.active{
+  background:rgba(140,0,0,.15);border-color:rgba(180,0,0,.25);
+}
+html[data-theme="brootal"] .chat-send{
+  background:var(--btn-primary-bg);
+  border:1px solid #ff4444;color:#fff;
+  box-shadow:0 0 8px rgba(180,0,0,.4);
+}
+html[data-theme="brootal"] .rx-btn:hover{
+  border-color:#cc0000;
+  box-shadow:0 0 8px rgba(180,0,0,.4);
+}
+html[data-theme="brootal"] .logo-dot,html[data-theme="brootal"] .np-dot{
+  background:#cc0000;box-shadow:0 0 8px rgba(200,0,0,.7);
+}
+/* Brootal glow text for accent elements */
+html[data-theme="brootal"] .role-badge.host,
+html[data-theme="brootal"] .l-host{color:#ff4444;text-shadow:0 0 8px rgba(200,0,0,.6)}
+
+/* ═══════════════════════════════
+   SHARED COMPONENT STYLES
+═══════════════════════════════ */
+/* Splash */
+#splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:200;transition:opacity .4s;overflow-y:auto;padding:20px}
+#splash.hidden{opacity:0;pointer-events:none}
+.splash-card{width:100%;max-width:420px;padding:44px 36px;background:var(--surface);border:1px solid var(--border);border-radius:16px;margin:auto}
+.logo{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:8px}
+.logo-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.splash-title{font-size:26px;font-weight:600;letter-spacing:-.5px;margin-bottom:4px}
+.splash-sub{color:var(--text-muted);font-size:13px;margin-bottom:32px;font-weight:300}
+.field-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.field-group{margin-bottom:20px}
+input[type="text"]{width:100%;background:var(--input-bg);border:1px solid var(--border2);border-radius:var(--radius);padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+input[type="text"]:focus{border-color:var(--accent)}
+input[type="text"]::placeholder{color:var(--text-dim)}
+.avatar-picker-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px}
+.avatar-opt{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .15s;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.avatar-opt:hover{transform:scale(1.1)}
+.avatar-opt.selected{border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,85,0,.25)}
+.custom-slot{background:var(--surface2);border:1.5px dashed var(--border2)!important;color:var(--text-muted);position:relative;overflow:hidden}
+.custom-slot:hover{border-color:var(--accent)!important;color:var(--accent)}
+.custom-slot input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:var(--radius);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all .15s}
+.btn-primary{background:var(--btn-primary-bg);color:var(--btn-primary-color);width:100%}
+.btn-secondary{background:var(--btn-bg);color:var(--btn-color);border:1px solid var(--btn-border)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text-dim);font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;border-top:1px solid var(--border)}
+.add-bar{display:flex;gap:8px}.add-bar input{flex:1}
+#splash-error{color:#ff4444;font-size:12px;margin-top:10px;display:none;font-family:'DM Mono',monospace}
+
+/* App shell */
+#app{display:none;flex-direction:column;min-height:100vh}
+.topbar{height:52px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;background:var(--surface);position:sticky;top:0;z-index:50}
+.topbar-logo{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.session-pill{background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:5px 10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px;cursor:pointer;transition:border-color .2s;min-width:0;flex:1;max-width:220px}
+.session-pill:hover{border-color:var(--accent)}
+.session-pill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;padding:2px 6px;border-radius:4px;text-transform:uppercase;flex-shrink:0}
+.tag-live{background:rgba(0,200,83,.12);color:var(--green)}
+.topbar-right{display:flex;align-items:center;gap:7px;margin-left:auto;flex-shrink:0}
+.icon-btn{width:32px;height:32px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .15s;flex-shrink:0}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.chat-toggle-btn{display:none}
+@media(max-width:800px){.chat-toggle-btn{display:flex}}
+.t-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;overflow:hidden}
+.t-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-name{font-size:13px;font-weight:500;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:480px){.profile-name{display:none}}
+.role-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:2px 5px;border-radius:4px;flex-shrink:0}
+.role-badge.host{background:var(--accent-dim);color:var(--accent)}
+.role-badge.listener{background:rgba(255,255,255,.06);color:var(--text-muted)}
+
+/* Layout */
+.body-layout{display:flex;flex:1;overflow:hidden;position:relative}
+.main-panel{flex:1;padding:20px;display:flex;flex-direction:column;gap:18px;overflow-y:auto;min-width:0}
+.section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px}
+
+/* Player */
+.player-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow)}
+.now-playing-bar{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.np-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:blink 1.5s infinite}
+.np-dot.idle{background:var(--text-dim);animation:none}
+.np-info{flex:1;min-width:0}
+.np-title{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np-meta{font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.widget-wrap{background:#0d0d0d;position:relative;overflow:hidden}
+html[data-theme="light"] .widget-wrap{background:#f0f0f0}
+html[data-theme="sunday"] .widget-wrap{background:#ede4d4}
+.widget-wrap iframe{display:block;width:100%;height:280px;border:none}
+.widget-empty{height:160px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--text-dim);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em}
+.widget-empty-icon{font-size:32px;opacity:.2}
+/* Waveform canvas */
+#waveform-canvas{position:absolute;bottom:0;left:0;width:100%;height:100%;pointer-events:none;z-index:3;display:none;opacity:.75}
+.controls{padding:10px 16px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--border)}
+.ctrl-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--border2);background:var(--surface2);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s;flex-shrink:0}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ctrl-btn.pp{width:40px;height:40px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:15px}
+.ctrl-btn.pp:hover{opacity:.88}
+.vol-wrap{display:flex;align-items:center;gap:7px;margin-left:auto;color:var(--text-muted);font-size:12px}
+input[type="range"]{-webkit-appearance:none;width:70px;height:3px;background:var(--border2);border-radius:2px;outline:none}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:var(--text);cursor:pointer}
+.listener-bar{padding:10px 16px;border-top:1px solid var(--border);background:rgba(255,85,0,.04);display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:12px;font-family:'DM Mono',monospace;flex-wrap:wrap}
+
+/* Queue */
+.queue-list{display:flex;flex-direction:column;gap:2px}
+.queue-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius);border:1px solid transparent;transition:all .15s}
+.queue-item:hover{background:var(--surface2);border-color:var(--border)}
+.queue-item.active{background:var(--accent-dim);border-color:rgba(255,85,0,.2)}
+.q-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-dim);width:16px;flex-shrink:0;text-align:right}
+.queue-item.active .q-num{color:var(--accent)}
+.q-info{flex:1;min-width:0}
+.q-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.q-url{font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'DM Mono',monospace}
+.q-actions{display:flex;gap:3px;opacity:0;transition:opacity .15s}
+.queue-item:hover .q-actions,.queue-item:focus-within .q-actions{opacity:1}
+@media(max-width:600px){.q-actions{opacity:1}}
+.q-btn{width:24px;height:24px;border-radius:4px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s}
+.q-btn:hover{background:var(--border2);color:var(--text)}
+.q-btn.rm:hover{color:#ff4444}
+.empty-queue{text-align:center;padding:32px 20px;color:var(--text-dim);font-size:12px;font-family:'DM Mono',monospace;letter-spacing:.05em}
+
+/* Right panel */
+.right-panel{width:280px;flex-shrink:0;border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;background:var(--surface);transition:transform .3s;box-shadow:var(--card-shadow)}
+@media(max-width:800px){
+  .right-panel{position:fixed;right:0;top:52px;bottom:0;z-index:40;transform:translateX(100%)}
+  .right-panel.open{transform:translateX(0)}
+}
+.panel-tab{padding:12px 16px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between}
+.listeners-list{padding:10px;display:flex;flex-direction:column;gap:3px;overflow-y:auto;max-height:180px;flex-shrink:0}
+.l-item{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;cursor:pointer;transition:background .1s}
+.l-item:hover{background:var(--surface2)}
+.l-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;overflow:hidden}
+.l-av img{width:100%;height:100%;object-fit:cover}
+.l-name{font-size:13px;flex:1}
+.l-host{font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.online-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+/* Chat */
+.chat-panel{display:flex;flex-direction:column;flex:1;overflow:hidden;border-top:1px solid var(--border)}
+.chat-messages{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:7px}
+.chat-msg{display:flex;gap:7px;align-items:flex-start}
+.chat-msg-body{flex:1;min-width:0}
+.chat-msg-name{font-size:11px;font-weight:600;margin-bottom:1px}
+.chat-msg-text{font-size:13px;line-height:1.4;word-break:break-word}
+.chat-msg.system .chat-msg-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);font-style:italic}
+.chat-msg.pinged{background:rgba(255,85,0,.07);border-radius:6px;padding:4px 6px;margin:-4px -6px}
+.chat-msg-text .ping{color:var(--accent);font-weight:600;animation:pingGlow 2s ease-out;cursor:default}
+@keyframes pingGlow{0%,20%{text-shadow:0 0 12px var(--accent),0 0 20px var(--accent);color:#fff}100%{text-shadow:none;color:var(--accent)}}
+/* GIF in chat */
+.chat-gif{max-width:180px;border-radius:6px;margin-top:4px;display:block;cursor:pointer}
+/* Chat input row */
+.chat-input-row{display:flex;gap:5px;padding:8px 10px;border-top:1px solid var(--border);position:relative}
+.chat-input-row input{flex:1;padding:8px 10px;font-size:13px}
+.chat-send{width:32px;height:32px;border-radius:6px;border:none;background:var(--accent);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.chat-send:hover{opacity:.85}
+
+/* Reactions */
+.reactions-bar{display:flex;align-items:center;gap:5px;padding:7px 10px;border-top:1px solid var(--border);flex-shrink:0;flex-wrap:wrap}
+.rx-btn{width:32px;height:32px;border-radius:7px;border:1px solid var(--border2);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .15s;flex-shrink:0}
+.rx-btn:hover{border-color:var(--accent);transform:scale(1.2)}
+.rx-btn:active{transform:scale(.9)}
+
+/* @mention dropdown */
+#mention-dropdown{position:absolute;bottom:100%;left:10px;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;z-index:60;min-width:160px;box-shadow:0 -4px 16px rgba(0,0,0,.3);display:none}
+.mention-opt{padding:8px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:13px;transition:background .1s}
+.mention-opt:hover{background:var(--surface2)}
+
+/* GIF picker */
+.gif-panel{position:absolute;bottom:100%;right:0;width:280px;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;z-index:60;box-shadow:0 -4px 20px rgba(0,0,0,.4);display:none;flex-direction:column}
+.gif-panel.open{display:flex}
+.gif-search-row{display:flex;gap:6px;padding:8px}
+.gif-search-row input{flex:1;padding:7px 10px;font-size:13px}
+.gif-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 8px 8px;max-height:200px;overflow-y:auto}
+.gif-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:5px;cursor:pointer;transition:opacity .15s}
+.gif-thumb:hover{opacity:.8}
+.gif-loading{text-align:center;padding:20px;color:var(--text-muted);font-size:12px;font-family:'DM Mono',monospace;grid-column:span 2}
+
+/* Mobile backdrop */
+.panel-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:39}
+.panel-backdrop.open{display:block}
+
+/* Settings modal */
+.settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.settings-overlay.open{display:flex}
+.settings-modal-inner{background:var(--surface);border:1px solid var(--border);border-radius:14px;width:100%;max-width:520px;max-height:85vh;overflow-y:auto;padding:28px}
+.settings-title{font-size:18px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.settings-close{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:20px;padding:0;line-height:1}
+.settings-close:hover{color:var(--text)}
+.settings-section{margin-bottom:24px}
+.settings-section-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px}
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.theme-card{border:2px solid var(--border2);border-radius:10px;overflow:hidden;cursor:pointer;transition:all .18s}
+.theme-card:hover{border-color:var(--accent)}
+.theme-card.selected{border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,85,0,.25)}
+.theme-card.disabled{opacity:.4;cursor:not-allowed}
+/* Theme preview panels */
+.tp{height:80px;display:flex;flex-direction:column;overflow:hidden;font-size:9px;position:relative;flex-shrink:0}
+.tp-bar{height:14px;display:flex;align-items:center;padding:0 6px;gap:4px;font-size:8px;letter-spacing:.1em;font-family:'DM Mono',monospace}
+.tp-body{flex:1;padding:5px 6px;display:flex;flex-direction:column;gap:3px}
+.tp-line{height:5px;border-radius:2px;opacity:.6}
+.tp-btn{height:10px;border-radius:3px;width:30px;margin-top:2px}
+/* Dark preview */
+.tp-dark{background:#0a0a0a}.tp-dark .tp-bar{background:#111;color:#ff5500}.tp-dark .tp-line{background:#333}.tp-dark .tp-btn{background:#ff5500}
+/* Light preview */
+.tp-light{background:#f0f0f0}.tp-light .tp-bar{background:#fff;color:#ff5500}.tp-light .tp-line{background:#ddd}.tp-light .tp-btn{background:#ff5500}
+/* Aero preview */
+.tp-aero{background:linear-gradient(150deg,#1a6acf,#061d4a)}.tp-aero .tp-bar{background:rgba(160,205,255,.2);color:#7fc8ff;border-bottom:1px solid rgba(255,255,255,.2)}.tp-aero .tp-line{background:rgba(255,255,255,.25)}.tp-aero .tp-btn{background:linear-gradient(180deg,#6ac0ff,#0050c0);border-radius:5px}
+/* Sunday preview */
+.tp-sunday{background:linear-gradient(150deg,#ede0cd,#d4c8b0)}.tp-sunday .tp-bar{background:rgba(255,252,245,.8);color:#d95e20;border-bottom:1px solid #c8bba8}.tp-sunday .tp-line{background:#c8bba8}.tp-sunday .tp-btn{background:linear-gradient(180deg,#f0894a,#b84010);border-radius:6px}
+/* Brootal preview */
+.tp-brootal{background:#050000}.tp-brootal .tp-bar{background:#0d0000;color:#cc0000;border-bottom:1px solid #2e0000;font-family:Impact,sans-serif;letter-spacing:.3em}.tp-brootal .tp-line{background:#2e0000}.tp-brootal .tp-btn{background:linear-gradient(180deg,#ff1111,#880000)}
+/* Theme card label */
+.theme-card-label{padding:7px 10px;font-size:12px;font-weight:500;background:var(--surface2);border-top:1px solid var(--border)}
+/* Toggle switch */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.toggle-row:last-child{border-bottom:none}
+.toggle-label{font-size:13px}
+.toggle-sub{font-size:11px;color:var(--text-muted);margin-top:1px}
+.toggle{position:relative;width:36px;height:20px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:var(--border2);border-radius:20px;cursor:pointer;transition:background .2s}
+.toggle-slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle input:checked+.toggle-slider{background:var(--accent)}
+.toggle input:checked+.toggle-slider::before{transform:translateX(16px)}
+/* Waveform settings */
+.wave-settings{display:flex;flex-direction:column;gap:10px;padding:10px 0}
+.wave-row{display:flex;align-items:center;gap:10px;font-size:13px}
+.wave-row label{min-width:60px;color:var(--text-muted);font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em}
+.wave-row input[type="range"]{flex:1;width:auto}
+.wave-row input[type="color"]{width:36px;height:28px;border:1px solid var(--border2);border-radius:4px;background:none;cursor:pointer;padding:2px}
+
+/* Privilege modal */
+.perm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.perm-overlay.open{display:flex}
+.perm-modal-inner{background:var(--surface);border:1px solid var(--border);border-radius:12px;width:100%;max-width:300px;padding:24px}
+.perm-title{font-size:15px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+
+/* Floating reactions */
+#reaction-stage{position:fixed;inset:0;pointer-events:none;z-index:90;overflow:hidden}
+.floating-rx{position:absolute;bottom:80px;font-size:32px;animation:floatUp 2.8s ease-out forwards;pointer-events:none;user-select:none;will-change:transform,opacity}
+@keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:1}60%{opacity:.9}100%{transform:translateY(-68vh) scale(.55) rotate(var(--rx-rot,8deg));opacity:0}}
+
+/* Toast */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:9px 16px;font-size:13px;font-family:'DM Mono',monospace;z-index:300;opacity:0;transition:all .22s;white-space:nowrap;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div id="reaction-stage"></div>
+
+<!-- SETTINGS MODAL -->
+<div class="settings-overlay" id="settings-overlay" onclick="closeSettings(event)">
+  <div class="settings-modal-inner" id="settings-modal">
+    <div class="settings-title">
+      Settings
+      <button class="settings-close" onclick="closeSettingsBtn()">✕</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section-title">Theme</div>
+      <div id="non-host-theme-note" style="display:none;font-size:12px;color:var(--text-muted);margin-bottom:10px;font-family:'DM Mono',monospace">
+        ⟳ Theme set by host
+      </div>
+      <div class="theme-grid" id="theme-grid">
+        <!-- injected by JS -->
+      </div>
+    </div>
+
+    <div class="settings-section" id="custom-themes-toggle-section">
+      <div class="settings-section-title">Options</div>
+      <div class="toggle-row">
+        <div><div class="toggle-label">Custom Themes</div><div class="toggle-sub">Enable Aero, Sunday Morning &amp; Brootal</div></div>
+        <label class="toggle"><input type="checkbox" id="custom-themes-chk" checked onchange="setCustomThemesEnabled(this.checked)"><span class="toggle-slider"></span></label>
+      </div>
+    </div>
+
+    <div class="settings-section" id="waveform-section" style="display:none">
+      <div class="settings-section-title">Waveform (Brootal)</div>
+      <div class="wave-settings">
+        <div class="wave-row">
+          <label>Color</label>
+          <input type="color" id="wave-color" value="#cc0000" oninput="setWaveColor(this.value)">
+          <span id="wave-color-val" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted)">#cc0000</span>
+        </div>
+        <div class="wave-row">
+          <label>Strength</label>
+          <input type="range" id="wave-strength" min="10" max="100" value="80" oninput="setWaveStrength(this.value)">
+          <span id="wave-str-val" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted)">80</span>
+        </div>
+        <div class="wave-row">
+          <label>Speed</label>
+          <input type="range" id="wave-speed" min="1" max="10" value="5" oninput="setWaveSpeed(this.value)">
+          <span id="wave-spd-val" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted)">5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVILEGE MODAL -->
+<div class="perm-overlay" id="perm-overlay" onclick="closePermModal(event)">
+  <div class="perm-modal-inner" id="perm-modal">
+    <div class="perm-title">
+      <div id="perm-av" style="width:28px;height:28px;border-radius:50%;flex-shrink:0"></div>
+      <span id="perm-name">User</span>
+    </div>
+    <div class="toggle-row">
+      <div><div class="toggle-label">Can add to queue</div></div>
+      <label class="toggle"><input type="checkbox" id="perm-add-chk" onchange="savePerm('canAdd',this.checked)"><span class="toggle-slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <div><div class="toggle-label">Can control playback</div></div>
+      <label class="toggle"><input type="checkbox" id="perm-ctrl-chk" onchange="savePerm('canControl',this.checked)"><span class="toggle-slider"></span></label>
+    </div>
+    <div style="margin-top:16px;display:flex;justify-content:flex-end">
+      <button class="btn btn-secondary" style="width:auto;padding:8px 16px" onclick="closePermBtn()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-card">
+    <div class="logo"><span class="logo-dot"></span> SoundSync</div>
+    <div class="splash-title">Listen together.</div>
+    <div class="splash-sub">Shared queues. Synced playback. Zero friction.</div>
+    <div class="field-group">
+      <div class="field-label">Your name</div>
+      <input type="text" id="inp-name" placeholder="e.g. maya" maxlength="24" autocomplete="off">
+    </div>
+    <div class="field-group">
+      <div class="field-label">Avatar</div>
+      <div class="avatar-picker-row" id="avatar-row"></div>
+    </div>
+    <button class="btn btn-primary" id="btn-create" style="margin-bottom:12px">Start a session</button>
+    <div class="divider">or join existing</div>
+    <div class="add-bar" style="margin-bottom:0">
+      <input type="text" id="inp-session" placeholder="Paste session ID…" autocomplete="off">
+      <button class="btn btn-secondary" id="btn-join">Join</button>
+    </div>
+    <div id="splash-error"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-logo"><span class="logo-dot"></span> SoundSync</div>
+    <div class="session-pill" onclick="copySessionLink()">
+      <span id="session-id-display">—</span>
+      <span style="font-size:11px;flex-shrink:0">⎘</span>
+    </div>
+    <span class="tag tag-live">● LIVE</span>
+    <div class="topbar-right">
+      <button class="icon-btn" onclick="openSettings()" title="Settings">⚙</button>
+      <button class="icon-btn chat-toggle-btn" id="chat-toggle-btn" onclick="togglePanel()">💬</button>
+      <div class="t-avatar" id="top-avatar"></div>
+      <div>
+        <div class="profile-name" id="top-name"></div>
+        <div class="role-badge" id="top-role"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-layout">
+    <div class="main-panel">
+      <!-- Player -->
+      <div>
+        <div class="section-label">Now playing</div>
+        <div class="player-card">
+          <div class="now-playing-bar">
+            <div class="np-dot idle" id="np-dot"></div>
+            <div class="np-info">
+              <div class="np-title" id="np-title">Nothing playing</div>
+              <div class="np-meta" id="np-meta">Add a track to the queue to get started</div>
+            </div>
+          </div>
+          <div class="widget-wrap" id="widget-wrap">
+            <div class="widget-empty" id="widget-empty">
+              <div class="widget-empty-icon">🎵</div>
+              <div>queue a track to begin</div>
+            </div>
+            <canvas id="waveform-canvas"></canvas>
+          </div>
+          <div class="controls" id="host-controls">
+            <button class="ctrl-btn" onclick="skipPrev()">⏮</button>
+            <button class="ctrl-btn pp" id="btn-play" onclick="togglePlay()">▶</button>
+            <button class="ctrl-btn" onclick="skipNext()">⏭</button>
+            <div class="vol-wrap">🔊<input type="range" id="vol-slider" min="0" max="100" value="80" oninput="setVolume(this.value)"></div>
+          </div>
+          <div class="listener-bar" id="listener-controls" style="display:none">
+            <span>⟳ Synced to host</span>
+            <div class="vol-wrap" style="margin-left:auto">🔊<input type="range" min="0" max="100" value="80" oninput="setVolumeLocal(this.value)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add to queue -->
+      <div id="add-queue-section" style="display:none">
+        <div class="section-label">Add to queue</div>
+        <div class="add-bar">
+          <input type="text" id="inp-url" placeholder="Paste a SoundCloud URL…" autocomplete="off" onkeydown="if(event.key==='Enter')addToQueue()">
+          <button class="btn btn-secondary" onclick="addToQueue()">Add</button>
+        </div>
+      </div>
+
+      <!-- Queue -->
+      <div>
+        <div class="section-label">Queue</div>
+        <div class="queue-list" id="queue-list"><div class="empty-queue">queue is empty</div></div>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="right-panel" id="right-panel">
+      <div class="panel-tab">
+        <span>Listeners</span>
+        <button id="panel-close-btn" onclick="togglePanel()" style="display:none;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:16px">✕</button>
+      </div>
+      <div class="listeners-list" id="listeners-list"></div>
+
+      <div class="chat-panel">
+        <div class="panel-tab">Chat</div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-row" style="position:relative">
+          <div id="mention-dropdown"></div>
+          <div class="gif-panel" id="gif-panel">
+            <div class="gif-search-row">
+              <input type="text" id="gif-search-inp" placeholder="Search GIFs…" oninput="searchGifs(this.value)" autocomplete="off">
+            </div>
+            <div class="gif-grid" id="gif-grid"><div class="gif-loading">Type to search</div></div>
+          </div>
+          <button class="icon-btn" style="flex-shrink:0" onclick="toggleGifPanel()" title="GIF">GIF</button>
+          <input type="text" id="chat-inp" placeholder="Say something… or @name" maxlength="300" oninput="handleChatInput(this.value)" onkeydown="handleChatKey(event)" autocomplete="off">
+          <button class="chat-send" onclick="sendChat()">↑</button>
+        </div>
+        <div class="reactions-bar">
+          <button class="rx-btn" onclick="sendReaction('👏')">👏</button>
+          <button class="rx-btn" onclick="sendReaction('🔥')">🔥</button>
+          <button class="rx-btn" onclick="sendReaction('💯')">💯</button>
+          <button class="rx-btn" onclick="sendReaction('😂')">😂</button>
+          <button class="rx-btn" onclick="sendReaction('🍅')">🍅</button>
+          <button class="rx-btn" onclick="sendReaction('💩')">💩</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-backdrop" id="panel-backdrop" onclick="togglePanel()"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script type="module">
+import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, push, remove, update, serverTimestamp, onDisconnect }
+                           from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+/* ── Firebase ── */
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyD1RQSEoEz8-RXQs3b4mrhcpQU9bBNBl4c",
+  authDomain:        "soundsync-b4854.firebaseapp.com",
+  databaseURL:       "https://soundsync-b4854-default-rtdb.firebaseio.com",
+  projectId:         "soundsync-b4854",
+  storageBucket:     "soundsync-b4854.firebasestorage.app",
+  messagingSenderId: "281971332262",
+  appId:             "1:281971332262:web:1653bf6a4f086748e4d067",
+  measurementId:     "G-9BQ0JXB2LX"
+};
+const fbApp = initializeApp(FIREBASE_CONFIG);
+const db = getDatabase(fbApp);
+const TENOR_KEY = 'LIVDSRZULELA';
+
+/* ── Emoji avatars ── */
+const EMOJI_AVATARS = [
+  {emoji:'🎧',bg:'#1a1a2e'},{emoji:'🌊',bg:'#0d2137'},{emoji:'🌿',bg:'#0d2310'},
+  {emoji:'🔥',bg:'#2a1100'},{emoji:'⚡',bg:'#1a1a00'},{emoji:'🌙',bg:'#1a0d2e'},{emoji:'🎲',bg:'#1a0d0d'},
+];
+
+/* ── App state ── */
+let SESSION_ID=null, IS_HOST=false;
+let MY_ID = Math.random().toString(36).slice(2,9);
+let MY_NAME='', MY_AVATAR=EMOJI_AVATARS[0];
+let QUEUE=[], CURRENT_IDX=-1, IS_PLAYING=false;
+let widget=null, widgetReady=false, widgetCurrentUrl=null;
+let initStartTime=0;                 // FIX A: compensate for widget init delay
+let pendingPlaybackSync=null;        // FIX B: handle queue/playback race
+let listenersDB={}, sessionPerms={};
+let sessionSettings={ theme:'dark', customEnabled:true, waveColor:'#cc0000', waveStrength:80, waveSpeed:5 };
+let waveformRaf=null, gifPanelOpen=false, permModalUid=null;
+
+/* ── Avatar picker ── */
+const avatarRow = document.getElementById('avatar-row');
+EMOJI_AVATARS.forEach((av,i)=>{
+  const el=document.createElement('div');
+  el.className='avatar-opt'+(i===0?' selected':'');
+  el.style.background=av.bg; el.textContent=av.emoji;
+  el.onclick=()=>{ selectAv(el); MY_AVATAR=av; };
+  avatarRow.appendChild(el);
+});
+const customSlot=document.createElement('div');
+customSlot.className='avatar-opt custom-slot'; customSlot.title='Upload photo';
+customSlot.innerHTML='<span style="pointer-events:none;font-size:15px">📷</span>';
+const fi=document.createElement('input'); fi.type='file'; fi.accept='image/*';
+fi.style.cssText='position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%';
+fi.addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const img=new Image(), ou=URL.createObjectURL(f);
+  img.onload=()=>{
+    const M=200,s=Math.min(1,M/Math.max(img.width,img.height));
+    const w=Math.round(img.width*s),h=Math.round(img.height*s);
+    const c=document.createElement('canvas'); c.width=w; c.height=h;
+    c.getContext('2d').drawImage(img,0,0,w,h);
+    const d=c.toDataURL('image/jpeg',.8); URL.revokeObjectURL(ou);
+    MY_AVATAR={type:'image',data:d};
+    customSlot.innerHTML=`<img src="${d}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;pointer-events:none">`;
+    const fi2=fi.cloneNode(); customSlot.appendChild(fi2);
+    fi2.addEventListener('change',e2=>fi.dispatchEvent(Object.assign(new Event('change'),{target:e2.target})));
+    selectAv(customSlot);
+  };
+  img.src=ou;
+});
+customSlot.appendChild(fi);
+avatarRow.appendChild(customSlot);
+function selectAv(el){document.querySelectorAll('.avatar-opt').forEach(e=>e.classList.remove('selected'));el.classList.add('selected');}
+
+/* ── SC Widget ── */
+function loadSC(){
+  return new Promise(r=>{
+    if(window.SC){r();return;}
+    const s=document.createElement('script'); s.src='https://w.soundcloud.com/player/api.js'; s.onload=r;
+    document.head.appendChild(s);
+  });
+}
+
+function buildIframe(url){
+  const wrap=document.getElementById('widget-wrap');
+  document.getElementById('widget-empty')?.remove();
+  wrap.querySelector('iframe')?.remove();
+  const enc=encodeURIComponent(url);
+  const iframe=document.createElement('iframe'); iframe.id='sc-widget'; iframe.allow='autoplay';
+  iframe.src=`https://w.soundcloud.com/player/?url=${enc}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true`;
+  iframe.style.cssText='display:block;width:100%;height:280px;border:none;';
+  const canvas=document.getElementById('waveform-canvas');
+  wrap.insertBefore(iframe, canvas || null);
+  return iframe;
+}
+
+function initWidget(url, autoPlay, seekMs){
+  widgetReady=false; widgetCurrentUrl=url; widget=null;
+  initStartTime=Date.now();   // FIX A: record start time
+  const iframe=buildIframe(url);
+  setTimeout(()=>{
+    if(!iframe.isConnected) return;
+    widget=SC.Widget(iframe);
+    widget.bind(SC.Widget.Events.READY,()=>{
+      widgetReady=true;
+      widget.setVolume(Number(document.getElementById('vol-slider')?.value??80));
+      // FIX A: compensate for time elapsed since initWidget was called
+      const elapsed=Date.now()-initStartTime;
+      const adjustedSeek=(seekMs||0)+(autoPlay?elapsed:0);
+      if(adjustedSeek>100) widget.seekTo(adjustedSeek);
+      if(autoPlay){
+        setTimeout(()=>{ widget.play(); IS_PLAYING=true; updatePlayBtn(); updateWaveform(); },80);
+      }
+    });
+    widget.bind(SC.Widget.Events.FINISH,()=>{ if(canControl()) skipNext(); });
+    widget.bind(SC.Widget.Events.PLAY, ()=>{ if(IS_HOST) pushState(true); });
+    widget.bind(SC.Widget.Events.PAUSE,()=>{ if(IS_HOST) pushState(false); });
+  },500);
+}
+
+/* ── Session ── */
+function genId(){ return Math.random().toString(36).slice(2,6).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase(); }
+function avPayload(){ if(MY_AVATAR.type==='image') return {type:'image',data:MY_AVATAR.data}; return {type:'emoji',emoji:MY_AVATAR.emoji,bg:MY_AVATAR.bg}; }
+
+async function createSession(){
+  SESSION_ID=genId(); IS_HOST=true;
+  await set(ref(db,`sessions/${SESSION_ID}`),{
+    host:MY_ID, created:serverTimestamp(),
+    playback:{playing:false,idx:-1,url:'',position:0,ts:Date.now()},
+    settings:sessionSettings
+  });
+  doJoin();
+}
+
+async function joinSessionById(id){
+  const snap=await get(ref(db,`sessions/${id}`));
+  if(!snap.exists()){showSplashError('Session not found.');return;}
+  SESSION_ID=id; IS_HOST=snap.val().host===MY_ID;
+  // Load session settings
+  const sett=snap.val().settings;
+  if(sett){ sessionSettings={...sessionSettings,...sett}; applyTheme(sessionSettings.theme); }
+  doJoin();
+}
+
+function doJoin(){
+  const presRef=ref(db,`sessions/${SESSION_ID}/listeners/${MY_ID}`);
+  set(presRef,{name:MY_NAME,avatar:avPayload(),isHost:IS_HOST,joined:serverTimestamp()});
+  onDisconnect(presRef).remove();
+
+  /* FIX B: queue loads first, playback applied once queue is ready */
+  onValue(ref(db,`sessions/${SESSION_ID}/queue`),snap=>{
+    const raw=snap.val()||{};
+    QUEUE=Object.entries(raw).sort((a,b)=>(a[1].order||0)-(b[1].order||0)).map(([id,v])=>({id,url:v.url,title:v.title||'…'}));
+    renderQueue();
+    // Apply any pending playback sync now that queue is populated
+    if(!IS_HOST && pendingPlaybackSync && CURRENT_IDX<0 && QUEUE.length>0){
+      handleListenerSync(pendingPlaybackSync);
+      pendingPlaybackSync=null;
+    }
+  });
+
+  onValue(ref(db,`sessions/${SESSION_ID}/playback`),snap=>{
+    if(!snap.exists()||IS_HOST) return;
+    const pb=snap.val();
+    // FIX B: store pending if queue not loaded yet
+    if(QUEUE.length===0){
+      pendingPlaybackSync=pb; return;
+    }
+    handleListenerSync(pb);
+  });
+
+  onValue(ref(db,`sessions/${SESSION_ID}/listeners`),snap=>{ listenersDB=snap.val()||{}; renderListeners(); });
+  onValue(ref(db,`sessions/${SESSION_ID}/chat`),snap=>{
+    const raw=snap.val()||{};
+    renderChat(Object.values(raw).sort((a,b)=>a.ts-b.ts));
+  });
+  onValue(ref(db,`sessions/${SESSION_ID}/reactions`),snap=>{
+    const raw=snap.val()||{}, now=Date.now();
+    Object.values(raw).forEach(r=>{ if(r.ts&&now-r.ts<3000&&r.uid!==MY_ID) spawnRx(r.emoji); });
+  });
+  onValue(ref(db,`sessions/${SESSION_ID}/perms`),snap=>{ sessionPerms=snap.val()||{}; updatePrivUI(); });
+  onValue(ref(db,`sessions/${SESSION_ID}/settings`),snap=>{
+    if(!snap.exists()) return;
+    const s=snap.val();
+    sessionSettings={...sessionSettings,...s};
+    applyTheme(sessionSettings.theme);
+    // Update settings UI if open
+    document.querySelectorAll('.theme-card').forEach(c=>{
+      c.classList.toggle('selected',c.dataset.theme===sessionSettings.theme);
+    });
+    document.getElementById('custom-themes-chk').checked=!!sessionSettings.customEnabled;
+    document.getElementById('wave-color').value=sessionSettings.waveColor||'#cc0000';
+    document.getElementById('wave-strength').value=sessionSettings.waveStrength||80;
+    document.getElementById('wave-speed').value=sessionSettings.waveSpeed||5;
+    updateWaveSettings();
+  });
+
+  launchApp();
+}
+
+/* ══════════════════════════════════════
+   LISTENER SYNC — FIXED VERSION
+
+   The two bugs:
+   A) Out of sync: seek didn't account for widget
+      init time (~500ms + READY callback delay).
+      Fix: initStartTime compensation in READY.
+   B) Nothing plays: queue/playback race condition —
+      playback event arrives before queue is loaded.
+      Fix: pendingPlaybackSync, applied on queue load.
+   C) Pause/unpause broken: old code seeked on every
+      event including plain play/pause toggles.
+      Fix: only seek on track change, never on
+      play/pause-only events.
+══════════════════════════════════════ */
+function handleListenerSync(pb){
+  const tidx=pb.idx, shouldPlay=pb.playing, pbUrl=pb.url||'';
+  if(tidx<0||tidx>=QUEUE.length) return;
+  const track=QUEUE[tidx];
+  const isNewTrack=(tidx!==CURRENT_IDX||pbUrl!==widgetCurrentUrl);
+
+  if(isNewTrack){
+    // New track — seek to compensate for elapsed time + network delay
+    CURRENT_IDX=tidx; updateNowPlaying(track);
+    const elapsed=(Date.now()-pb.ts);
+    const seekMs=(pb.position||0)+(shouldPlay?elapsed:0);
+    initWidget(track.url, shouldPlay, seekMs);
+    IS_PLAYING=shouldPlay; updatePlayBtn(); updateWaveform();
+    return;
+  }
+
+  // Same track — ONLY play/pause, no seek (FIX C)
+  if(!widgetReady){ setTimeout(()=>handleListenerSync(pb),300); return; }
+  if(shouldPlay&&!IS_PLAYING){ widget.play(); IS_PLAYING=true; }
+  else if(!shouldPlay&&IS_PLAYING){ widget.pause(); IS_PLAYING=false; }
+  updatePlayBtn(); updateWaveform();
+}
+
+function pushState(playing, idx, position){
+  if(!IS_HOST) return;
+  if(idx===undefined) idx=CURRENT_IDX;
+  const url=QUEUE[idx]?.url||'';
+  const doUp=pos=>update(ref(db,`sessions/${SESSION_ID}/playback`),{
+    playing:playing!==undefined?playing:IS_PLAYING, idx, url,
+    position:position!==undefined?position:pos, ts:Date.now()
+  });
+  if(widget&&widgetReady) widget.getPosition(doUp); else doUp(position||0);
+}
+
+/* ── Privileges ── */
+function canControl(){ return IS_HOST||(sessionPerms[MY_ID]?.canControl===true); }
+function canAdd(){ return IS_HOST||(sessionPerms[MY_ID]?.canAdd===true); }
+function updatePrivUI(){
+  document.getElementById('add-queue-section').style.display=canAdd()?'block':'none';
+  if(!IS_HOST){
+    document.getElementById('host-controls').style.display=canControl()?'flex':'none';
+    document.getElementById('listener-controls').style.display=canControl()?'none':'flex';
+  }
+}
+
+/* ── Controls ── */
+window.togglePlay=function(){
+  if(!canControl()) return;
+  if(CURRENT_IDX<0){if(QUEUE.length)playIndex(0);return;}
+  if(!widgetReady) return;
+  IS_PLAYING=!IS_PLAYING;
+  IS_PLAYING?widget.play():widget.pause();
+  updatePlayBtn(); pushState(IS_PLAYING); updateWaveform();
+};
+window.skipNext=()=>{ if(canControl()&&CURRENT_IDX+1<QUEUE.length)playIndex(CURRENT_IDX+1); };
+window.skipPrev=()=>{ if(canControl()&&CURRENT_IDX-1>=0)playIndex(CURRENT_IDX-1); };
+function playIndex(idx){
+  if(idx<0||idx>=QUEUE.length) return;
+  CURRENT_IDX=idx; IS_PLAYING=true; updateNowPlaying(QUEUE[idx]);
+  initWidget(QUEUE[idx].url,true,0);
+  updatePlayBtn(); pushState(true,idx,0); updateWaveform();
+}
+window.setVolume=v=>{ if(widgetReady)widget.setVolume(Number(v)); };
+window.setVolumeLocal=v=>{ if(widgetReady)widget.setVolume(Number(v)); };
+
+/* ── Queue ── */
+window.addToQueue=async function(){
+  if(!canAdd()) return;
+  const inp=document.getElementById('inp-url');
+  const url=inp.value.trim(); if(!url)return;
+  if(!url.includes('soundcloud.com')){showToast('Paste a valid SoundCloud URL');return;}
+  inp.value='';
+  const title=await resolveSCTitle(url);
+  await set(push(ref(db,`sessions/${SESSION_ID}/queue`)),{url,title,order:QUEUE.length,addedBy:MY_ID});
+  if(CURRENT_IDX<0&&IS_HOST) setTimeout(()=>playIndex(0),200);
+};
+async function resolveSCTitle(url){
+  try{const r=await fetch(`https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`);const j=await r.json();return j.title||url;}catch{return url;}
+}
+window.removeFromQueue=async function(id,idx){
+  if(!canControl()){showToast('You don\'t have permission');return;}
+  await remove(ref(db,`sessions/${SESSION_ID}/queue/${id}`));
+  if(idx===CURRENT_IDX){CURRENT_IDX=-1;updateNowPlaying(null);}
+};
+window.playFromQueue=function(idx){
+  if(!canControl()){showToast('You don\'t have permission');return;}
+  playIndex(idx);
+};
+
+/* ── Chat + @mentions + GIF ── */
+window.handleChatInput=function(val){
+  // @mention autocomplete
+  const atIdx=val.lastIndexOf('@');
+  if(atIdx>=0){
+    const partial=val.slice(atIdx+1).toLowerCase();
+    const matches=Object.values(listenersDB).filter(l=>l.uid!==MY_ID&&l.name.toLowerCase().startsWith(partial)&&partial.length>0);
+    showMentionDropdown(matches,atIdx);
+  } else { closeMentionDropdown(); }
+};
+window.handleChatKey=function(e){
+  const dd=document.getElementById('mention-dropdown');
+  if(dd.style.display==='block'){
+    if(e.key==='ArrowDown'){e.preventDefault();focusMentionOpt(1);}
+    else if(e.key==='ArrowUp'){e.preventDefault();focusMentionOpt(-1);}
+    else if(e.key==='Enter'){e.preventDefault();const f=dd.querySelector('.mention-opt:focus');if(f)f.click();else sendChat();}
+    else if(e.key==='Escape') closeMentionDropdown();
+    else if(e.key==='Enter') sendChat();
+  } else if(e.key==='Enter') sendChat();
+};
+let focusedMentionIdx=-1;
+function showMentionDropdown(matches,atIdx){
+  const dd=document.getElementById('mention-dropdown');
+  if(!matches.length){dd.style.display='none';return;}
+  dd.style.display='block';
+  dd.innerHTML=matches.map((l,i)=>`
+    <div class="mention-opt" tabindex="0" data-name="${esc(l.name)}" data-atidx="${atIdx}"
+      onclick="completeMention('${esc(l.name)}',${atIdx})"
+      onkeydown="if(event.key==='Enter')completeMention('${esc(l.name)}',${atIdx})">
+      ${avHTML(l.avatar,20)} <span>${esc(l.name)}</span>
+    </div>`).join('');
+}
+function closeMentionDropdown(){document.getElementById('mention-dropdown').style.display='none';focusedMentionIdx=-1;}
+function focusMentionOpt(dir){
+  const opts=[...document.querySelectorAll('.mention-opt')];
+  if(!opts.length) return;
+  focusedMentionIdx=Math.max(0,Math.min(opts.length-1,focusedMentionIdx+dir));
+  opts[focusedMentionIdx].focus();
+}
+window.completeMention=function(name,atIdx){
+  const inp=document.getElementById('chat-inp');
+  inp.value=inp.value.slice(0,atIdx)+'@'+name+' ';
+  closeMentionDropdown(); inp.focus();
+};
+
+window.sendChat=function(){
+  closeMentionDropdown(); closeGifPanel();
+  const inp=document.getElementById('chat-inp');
+  const txt=inp.value.trim(); if(!txt)return; inp.value='';
+  push(ref(db,`sessions/${SESSION_ID}/chat`),{uid:MY_ID,name:MY_NAME,avatar:avPayload(),text:txt,ts:Date.now()});
+};
+window.sendGif=function(url){
+  closeGifPanel();
+  push(ref(db,`sessions/${SESSION_ID}/chat`),{uid:MY_ID,name:MY_NAME,avatar:avPayload(),gif:url,ts:Date.now()});
+};
+
+/* GIF panel */
+window.toggleGifPanel=function(){
+  gifPanelOpen=!gifPanelOpen;
+  document.getElementById('gif-panel').classList.toggle('open',gifPanelOpen);
+  if(gifPanelOpen) document.getElementById('gif-search-inp').focus();
+};
+function closeGifPanel(){gifPanelOpen=false;document.getElementById('gif-panel').classList.remove('open');}
+let gifDebounce=null;
+window.searchGifs=function(q){
+  clearTimeout(gifDebounce);
+  const grid=document.getElementById('gif-grid');
+  if(!q.trim()){grid.innerHTML='<div class="gif-loading">Type to search</div>';return;}
+  grid.innerHTML='<div class="gif-loading">Searching…</div>';
+  gifDebounce=setTimeout(async()=>{
+    try{
+      const r=await fetch(`https://api.tenor.com/v1/search?q=${encodeURIComponent(q)}&key=${TENOR_KEY}&limit=8&media_filter=minimal`);
+      const j=await r.json();
+      if(!j.results?.length){grid.innerHTML='<div class="gif-loading">No results</div>';return;}
+      grid.innerHTML=j.results.map(g=>{
+        const url=g.media?.[0]?.tinygif?.url||g.media?.[0]?.gif?.url||'';
+        if(!url) return '';
+        return `<img class="gif-thumb" src="${url}" loading="lazy" onclick="sendGif('${url}')">`;
+      }).join('');
+    }catch{grid.innerHTML='<div class="gif-loading">Error loading GIFs</div>';}
+  },400);
+};
+
+/* ── Reactions ── */
+window.sendReaction=function(emoji){
+  spawnRx(emoji);
+  const rRef=push(ref(db,`sessions/${SESSION_ID}/reactions`));
+  set(rRef,{uid:MY_ID,emoji,ts:Date.now()});
+};
+function spawnRx(emoji){
+  const stage=document.getElementById('reaction-stage');
+  const el=document.createElement('div'); el.className='floating-rx'; el.textContent=emoji;
+  el.style.left=(8+Math.random()*82)+'%';
+  el.style.setProperty('--rx-rot',(Math.random()-0.5)*28+'deg');
+  stage.appendChild(el);
+  el.addEventListener('animationend',()=>el.remove());
+}
+
+/* ── Privileges modal ── */
+window.openPermModal=function(uid){
+  if(!IS_HOST) return;
+  permModalUid=uid;
+  const l=listenersDB[uid]; if(!l) return;
+  const perms=sessionPerms[uid]||{};
+  document.getElementById('perm-name').textContent=l.name;
+  document.getElementById('perm-av').innerHTML=avHTML(l.avatar,28);
+  document.getElementById('perm-add-chk').checked=!!perms.canAdd;
+  document.getElementById('perm-ctrl-chk').checked=!!perms.canControl;
+  document.getElementById('perm-overlay').classList.add('open');
+};
+window.savePerm=function(key,val){
+  if(!IS_HOST||!permModalUid) return;
+  update(ref(db,`sessions/${SESSION_ID}/perms/${permModalUid}`),{[key]:val});
+};
+window.closePermModal=function(e){if(!e||e.target===document.getElementById('perm-overlay'))closePermBtn();};
+window.closePermBtn=function(){document.getElementById('perm-overlay').classList.remove('open');permModalUid=null;};
+
+/* ── Theme system ── */
+const THEMES=[
+  {id:'dark',label:'Dark',previewClass:'tp-dark',custom:false},
+  {id:'light',label:'Light',previewClass:'tp-light',custom:false},
+  {id:'aero',label:'Aero',previewClass:'tp-aero',custom:true},
+  {id:'sunday',label:'Sunday Morning',previewClass:'tp-sunday',custom:true},
+  {id:'brootal',label:'(Brootal...)',previewClass:'tp-brootal',custom:true},
+];
+function buildThemeGrid(){
+  const grid=document.getElementById('theme-grid');
+  grid.innerHTML=THEMES.map(t=>`
+    <div class="theme-card ${sessionSettings.theme===t.id?'selected':''} ${t.custom&&!sessionSettings.customEnabled?'disabled':''}"
+      data-theme="${t.id}" data-custom="${t.custom}"
+      onclick="pickTheme('${t.id}')">
+      <div class="tp ${t.previewClass}">
+        <div class="tp-bar">● SS</div>
+        <div class="tp-body">
+          <div class="tp-line" style="width:70%"></div>
+          <div class="tp-line" style="width:50%"></div>
+          <div class="tp-btn"></div>
+        </div>
+      </div>
+      <div class="theme-card-label">${t.label}</div>
+    </div>`).join('');
+}
+window.pickTheme=function(id){
+  const t=THEMES.find(t=>t.id===id);
+  if(!t) return;
+  if(t.custom&&!sessionSettings.customEnabled){showToast('Enable custom themes first');return;}
+  if(!IS_HOST){showToast('Only the host can change the theme');return;}
+  sessionSettings.theme=id;
+  pushSettings();
+};
+window.setCustomThemesEnabled=function(val){
+  if(!IS_HOST){showToast('Only the host can change settings');document.getElementById('custom-themes-chk').checked=!val;return;}
+  sessionSettings.customEnabled=val;
+  if(!val&&THEMES.find(t=>t.id===sessionSettings.theme)?.custom){
+    sessionSettings.theme='dark';
+  }
+  pushSettings();
+};
+window.setWaveColor=function(v){
+  sessionSettings.waveColor=v;
+  document.getElementById('wave-color-val').textContent=v;
+  if(IS_HOST) pushSettings();
+};
+window.setWaveStrength=function(v){
+  sessionSettings.waveStrength=Number(v);
+  document.getElementById('wave-str-val').textContent=v;
+  if(IS_HOST) pushSettings();
+};
+window.setWaveSpeed=function(v){
+  sessionSettings.waveSpeed=Number(v);
+  document.getElementById('wave-spd-val').textContent=v;
+  if(IS_HOST) pushSettings();
+};
+function pushSettings(){
+  applyTheme(sessionSettings.theme);
+  if(SESSION_ID) update(ref(db,`sessions/${SESSION_ID}/settings`),sessionSettings);
+  buildThemeGrid();
+  document.getElementById('waveform-section').style.display=sessionSettings.theme==='brootal'?'block':'none';
+}
+function applyTheme(name){
+  document.documentElement.setAttribute('data-theme',name||'dark');
+  updateWaveform();
+}
+
+/* ── Waveform (canvas, Brootal theme only) ── */
+function updateWaveform(){
+  const active=sessionSettings.theme==='brootal'&&IS_PLAYING&&widgetCurrentUrl;
+  if(active) startWaveform(); else stopWaveform();
+}
+function startWaveform(){
+  const canvas=document.getElementById('waveform-canvas');
+  if(!canvas) return;
+  canvas.style.display='block';
+  if(waveformRaf) return; // already running
+  function draw(){
+    const W=canvas.offsetWidth, H=canvas.offsetHeight;
+    if(W===0||H===0){waveformRaf=requestAnimationFrame(draw);return;}
+    canvas.width=W; canvas.height=H;
+    const ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,W,H);
+    const t=Date.now()/1000;
+    const spd=sessionSettings.waveSpeed/5;
+    const str=sessionSettings.waveStrength/100;
+    const bars=Math.floor(W/5);
+    ctx.fillStyle=sessionSettings.waveColor;
+    // Gradient from color to transparent toward top
+    const grad=ctx.createLinearGradient(0,0,0,H);
+    grad.addColorStop(0,'transparent');
+    grad.addColorStop(0.4,sessionSettings.waveColor+'55');
+    grad.addColorStop(1,sessionSettings.waveColor+'cc');
+    ctx.fillStyle=grad;
+    for(let i=0;i<bars;i++){
+      const x=i*5;
+      const phase=i*0.18;
+      const h=IS_PLAYING?(
+        Math.abs(Math.sin(t*2.4*spd+phase))*0.38+
+        Math.abs(Math.sin(t*1.6*spd+phase*1.4))*0.28+
+        Math.abs(Math.sin(t*5.1*spd+phase*0.7))*0.18+
+        (Math.random()*0.1)
+      )*str*H*0.88+2:3;
+      ctx.fillRect(x,H-h,4,h);
+    }
+    waveformRaf=requestAnimationFrame(draw);
+  }
+  draw();
+}
+function stopWaveform(){
+  if(waveformRaf){cancelAnimationFrame(waveformRaf);waveformRaf=null;}
+  const canvas=document.getElementById('waveform-canvas');
+  if(canvas) canvas.style.display='none';
+}
+
+/* ── Settings modal ── */
+window.openSettings=function(){
+  buildThemeGrid();
+  document.getElementById('non-host-theme-note').style.display=IS_HOST?'none':'block';
+  document.getElementById('wave-color').value=sessionSettings.waveColor||'#cc0000';
+  document.getElementById('wave-strength').value=sessionSettings.waveStrength||80;
+  document.getElementById('wave-speed').value=sessionSettings.waveSpeed||5;
+  document.getElementById('custom-themes-chk').checked=!!sessionSettings.customEnabled;
+  document.getElementById('waveform-section').style.display=sessionSettings.theme==='brootal'?'block':'none';
+  updateWaveSettings();
+  document.getElementById('settings-overlay').classList.add('open');
+};
+function updateWaveSettings(){
+  document.getElementById('wave-color-val').textContent=sessionSettings.waveColor||'#cc0000';
+  document.getElementById('wave-str-val').textContent=sessionSettings.waveStrength||80;
+  document.getElementById('wave-spd-val').textContent=sessionSettings.waveSpeed||5;
+}
+window.closeSettings=function(e){if(e.target===document.getElementById('settings-overlay'))closeSettingsBtn();};
+window.closeSettingsBtn=function(){document.getElementById('settings-overlay').classList.remove('open');};
+
+/* ── Mobile panel ── */
+window.togglePanel=function(){
+  const p=document.getElementById('right-panel');
+  const b=document.getElementById('panel-backdrop');
+  const cb=document.getElementById('panel-close-btn');
+  const open=p.classList.toggle('open');
+  b.classList.toggle('open',open);
+  if(cb) cb.style.display=open?'block':'none';
+};
+
+/* ── Render helpers ── */
+function avHTML(av,size=26){
+  const s=size,fs=Math.round(s*.46);
+  if(!av) return `<div style="width:${s}px;height:${s}px;border-radius:50%;background:#333;display:flex;align-items:center;justify-content:center;font-size:${fs}px;flex-shrink:0">?</div>`;
+  if(av.type==='image') return `<div style="width:${s}px;height:${s}px;border-radius:50%;overflow:hidden;flex-shrink:0"><img src="${av.data}" style="width:100%;height:100%;object-fit:cover"></div>`;
+  return `<div style="width:${s}px;height:${s}px;border-radius:50%;background:${av.bg||'#222'};display:flex;align-items:center;justify-content:center;font-size:${fs}px;flex-shrink:0">${av.emoji||'?'}</div>`;
+}
+
+function parsePings(text){
+  // Replace @name with glowing span if that name is in session
+  const names=Object.values(listenersDB).map(l=>l.name);
+  let safe=esc(text);
+  names.forEach(n=>{
+    const escaped=n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    safe=safe.replace(new RegExp('@'+escaped,'g'),`<span class="ping">@${esc(n)}</span>`);
+  });
+  return safe;
+}
+function isMentioned(text){ return Object.values(listenersDB).some(l=>l.uid===MY_ID&&text.includes('@'+l.name))||(text.includes('@'+MY_NAME)); }
+
+function renderQueue(){
+  const el=document.getElementById('queue-list');
+  if(!QUEUE.length){el.innerHTML='<div class="empty-queue">queue is empty</div>';return;}
+  el.innerHTML=QUEUE.map((t,i)=>`
+    <div class="queue-item ${i===CURRENT_IDX?'active':''}" ondblclick="playFromQueue(${i})">
+      <div class="q-num">${i===CURRENT_IDX?'▶':i+1}</div>
+      <div class="q-info"><div class="q-title">${esc(t.title)}</div><div class="q-url">${esc(t.url)}</div></div>
+      <div class="q-actions">
+        ${canControl()?`<button class="q-btn" onclick="playFromQueue(${i})">▶</button>`:''}
+        ${canControl()?`<button class="q-btn rm" onclick="removeFromQueue('${t.id}',${i})">✕</button>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function renderListeners(){
+  const el=document.getElementById('listeners-list');
+  const entries=Object.entries(listenersDB);
+  el.innerHTML=entries.map(([uid,l])=>`
+    <div class="l-item" onclick="${IS_HOST&&uid!==MY_ID?`openPermModal('${uid}')`:''}" title="${IS_HOST&&uid!==MY_ID?'Click to edit permissions':''}">
+      <div class="online-dot"></div>
+      ${avHTML(l.avatar,26)}
+      <div class="l-name">${esc(l.name)}</div>
+      ${l.isHost?'<div class="l-host">host</div>':''}
+      ${IS_HOST&&uid!==MY_ID?'<span style="font-size:10px;color:var(--text-dim)">⚙</span>':''}
+    </div>`).join('');
+}
+
+function renderChat(msgs){
+  const el=document.getElementById('chat-messages');
+  const atBottom=el.scrollHeight-el.scrollTop-el.clientHeight<50;
+  el.innerHTML=msgs.map(m=>{
+    if(m.system) return `<div class="chat-msg system"><div class="chat-msg-body"><div class="chat-msg-text">${esc(m.text)}</div></div></div>`;
+    const pinged=m.text&&isMentioned(m.text);
+    const textContent=m.gif
+      ?`<img class="chat-gif" src="${m.gif}" loading="lazy">`
+      :`<div class="chat-msg-text">${parsePings(m.text||'')}</div>`;
+    return `<div class="chat-msg ${pinged?'pinged':''}">
+      ${avHTML(m.avatar,22)}
+      <div class="chat-msg-body">
+        <div class="chat-msg-name">${esc(m.name)}</div>
+        ${textContent}
+      </div>
+    </div>`;
+  }).join('');
+  if(atBottom) el.scrollTop=el.scrollHeight;
+}
+
+function updateNowPlaying(track){
+  document.getElementById('np-dot').className='np-dot'+(track?'':' idle');
+  document.getElementById('np-title').textContent=track?track.title:'Nothing playing';
+  document.getElementById('np-meta').textContent=track?track.url:'Add a track to the queue to get started';
+  if(!track){
+    const wrap=document.getElementById('widget-wrap');
+    wrap.querySelector('iframe')?.remove();
+    if(!wrap.querySelector('.widget-empty'))
+      wrap.insertAdjacentHTML('beforeend','<div class="widget-empty" id="widget-empty"><div class="widget-empty-icon">🎵</div><div>queue a track to begin</div></div>');
+    widget=null; widgetReady=false; widgetCurrentUrl=null;
+    stopWaveform();
+  }
+}
+function updatePlayBtn(){ const b=document.getElementById('btn-play'); if(b) b.textContent=IS_PLAYING?'⏸':'▶'; }
+
+/* ── Launch ── */
+async function launchApp(){
+  await loadSC();
+  document.getElementById('splash').classList.add('hidden');
+  const app=document.getElementById('app'); app.style.display='flex';
+  document.getElementById('session-id-display').textContent=SESSION_ID;
+  document.getElementById('top-name').textContent=MY_NAME;
+  const topAv=document.getElementById('top-avatar');
+  if(MY_AVATAR.type==='image'){ topAv.innerHTML=`<img src="${MY_AVATAR.data}" style="width:100%;height:100%;object-fit:cover">`; }
+  else { topAv.style.background=MY_AVATAR.bg; topAv.textContent=MY_AVATAR.emoji; }
+  const roleEl=document.getElementById('top-role');
+  roleEl.textContent=IS_HOST?'Host':'Listener';
+  roleEl.className='role-badge '+(IS_HOST?'host':'listener');
+  // Initial privilege UI
+  if(IS_HOST){
+    document.getElementById('add-queue-section').style.display='block';
+    document.getElementById('host-controls').style.display='flex';
+    document.getElementById('listener-controls').style.display='none';
+  } else {
+    document.getElementById('host-controls').style.display='none';
+    document.getElementById('listener-controls').style.display='flex';
+  }
+  if(window.innerWidth<=800&&document.getElementById('panel-close-btn'))
+    document.getElementById('panel-close-btn').style.display='block';
+  applyTheme(sessionSettings.theme);
+}
+
+/* ── Splash ── */
+function validateName(){ MY_NAME=document.getElementById('inp-name').value.trim(); if(!MY_NAME){showSplashError('Enter a name first.');return false;} hideSplashError(); return true; }
+document.getElementById('btn-create').onclick=()=>{ if(validateName())createSession(); };
+document.getElementById('btn-join').onclick=()=>{
+  if(!validateName())return;
+  const id=document.getElementById('inp-session').value.trim().toUpperCase();
+  if(!id){showSplashError('Paste a session ID.');return;}
+  joinSessionById(id);
+};
+document.getElementById('inp-name').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('btn-create').click();});
+function showSplashError(m){const e=document.getElementById('splash-error');e.textContent=m;e.style.display='block';}
+function hideSplashError(){document.getElementById('splash-error').style.display='none';}
+
+/* ── Utils ── */
+window.copySessionLink=function(){
+  const link=`${location.origin}${location.pathname}?session=${SESSION_ID}`;
+  navigator.clipboard.writeText(link).then(()=>showToast('Link copied!')).catch(()=>showToast('ID: '+SESSION_ID));
+};
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function esc(s=''){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// Close GIF / mention on outside click
+document.addEventListener('click',e=>{
+  if(gifPanelOpen&&!document.getElementById('gif-panel').contains(e.target)&&e.target.getAttribute('onclick')!=='toggleGifPanel()') closeGifPanel();
+  if(!document.getElementById('chat-input-row')?.contains(e.target)) closeMentionDropdown();
+});
+
+// Auto-join from URL
+const autoSession=new URLSearchParams(location.search).get('session');
+if(autoSession) document.getElementById('inp-session').value=autoSession;
+</script>
+</body>
+</html>
