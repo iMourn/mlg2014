@@ -80,128 +80,234 @@ html[data-theme="sunday"] input[type="text"]{background:var(--input-bg);border:1
 /* ═══ BROOTAL ═══ — 2000s SCENE EMO, NO MERCY */
 html[data-theme="brootal"]{
   --bg:#000;--surface:#080000;--surface2:#0f0000;
-  --border:#440000;--border2:#660000;
+  --border:#550000;--border2:#770000;
   --text:#e8cccc;--text-muted:#994444;--text-dim:#3a1010;
   --accent:#ff0000;--accent-dim:rgba(255,0,0,.1);
   --green:#880000;--radius:0;
-  --card-shadow:2px 2px 0 #440000,-2px -2px 0 #220000;
-  --btn-bg:#0a0000;--btn-border:#660000;--btn-color:#cc4444;
-  --btn-primary-bg:linear-gradient(180deg,#dd0000 0%,#990000 50%,#660000 100%);
-  --btn-primary-color:#fff;--input-bg:#050000;
-  --font-ui:Impact,'Arial Black',sans-serif;
+  --card-shadow:3px 3px 0 #330000,-1px -1px 0 #1a0000;
+  --btn-bg:#0a0000;--btn-border:#770000;--btn-color:#dd5555;
+  --btn-primary-bg:linear-gradient(180deg,#cc0000 0%,#880000 50%,#550000 100%);
+  --btn-primary-color:#fff;--input-bg:#040000;
+  --font-ui:Impact,'Arial Black','Arial Narrow',sans-serif;
 }
-/* Kill ALL border-radius in Brootal */
-html[data-theme="brootal"] *{border-radius:0 !important}
+/* Absolute: kill ALL border-radius */
+html[data-theme="brootal"] *{border-radius:0!important}
+/* ALL CAPS everywhere */
+html[data-theme="brootal"] body,
+html[data-theme="brootal"] .np-title,
+html[data-theme="brootal"] .np-meta,
+html[data-theme="brootal"] .q-title,
+html[data-theme="brootal"] .chat-msg-name,
+html[data-theme="brootal"] .profile-name,
+html[data-theme="brootal"] .l-name,
+html[data-theme="brootal"] .toggle-label{text-transform:uppercase}
 html[data-theme="brootal"] body{
+  font-family:var(--font-ui);letter-spacing:.04em;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E") repeat,
-    repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(60,0,0,.04) 40px,rgba(60,0,0,.04) 41px),
-    repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(60,0,0,.04) 40px,rgba(60,0,0,.04) 41px),
-    radial-gradient(ellipse 100% 50% at 50% 0%,rgba(100,0,0,.25) 0%,transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23noise)' opacity='0.055'/%3E%3C/svg%3E") repeat,
+    repeating-linear-gradient(45deg,transparent,transparent 38px,rgba(80,0,0,.035) 38px,rgba(80,0,0,.035) 39px),
+    repeating-linear-gradient(-45deg,transparent,transparent 38px,rgba(80,0,0,.035) 38px,rgba(80,0,0,.035) 39px),
+    radial-gradient(ellipse 120% 55% at 50% 0%,rgba(120,0,0,.3) 0%,transparent 65%),
+    radial-gradient(ellipse 80% 40% at 80% 100%,rgba(60,0,0,.2) 0%,transparent 60%),
     #000;
   min-height:100vh;
-  font-family:var(--font-ui);
 }
-/* Top barbed-wire strip */
+/* Top + bottom barbed wire strips */
 html[data-theme="brootal"] body::before{
-  content:'';position:fixed;top:0;left:0;right:0;height:4px;z-index:999;
-  background:repeating-linear-gradient(90deg,#ff0000 0,#ff0000 3px,#000 3px,#000 6px,#880000 6px,#880000 9px,#000 9px,#000 12px);
+  content:'';position:fixed;top:0;left:0;right:0;height:5px;z-index:999;
+  background:repeating-linear-gradient(90deg,#ff0000 0,#ff0000 4px,#000 4px,#000 8px,#990000 8px,#990000 12px,#000 12px,#000 16px);
 }
 html[data-theme="brootal"] body::after{
-  content:'';position:fixed;bottom:0;left:0;right:0;height:4px;z-index:999;
-  background:repeating-linear-gradient(90deg,#ff0000 0,#ff0000 3px,#000 3px,#000 6px,#880000 6px,#880000 9px,#000 9px,#000 12px);
+  content:'';position:fixed;bottom:0;left:0;right:0;height:5px;z-index:999;
+  background:repeating-linear-gradient(90deg,#ff0000 0,#ff0000 4px,#000 4px,#000 8px,#990000 8px,#990000 12px,#000 12px,#000 16px);
 }
 html[data-theme="brootal"] .topbar{
-  background:#000;border-bottom:2px solid #660000;
-  box-shadow:0 2px 0 #440000,0 3px 20px rgba(200,0,0,.15);
-  margin-top:4px;
+  background:linear-gradient(180deg,#0a0000 0%,#040000 100%);
+  border-bottom:3px solid #770000;
+  border-top:none;
+  box-shadow:0 3px 0 #330000,0 4px 24px rgba(200,0,0,.2);
+  margin-top:5px;
 }
 html[data-theme="brootal"] .topbar-logo{
-  font-family:Impact,'Arial Black',sans-serif;
-  font-size:14px;letter-spacing:.4em;
-  color:#ff0000;text-shadow:0 0 8px #ff0000,0 0 20px rgba(255,0,0,.4),2px 2px 0 #440000;
+  font-family:Impact,'Arial Black',sans-serif;font-size:15px;
+  letter-spacing:.5em;color:#ff0000;
+  text-shadow:0 0 10px #ff0000,0 0 25px rgba(255,0,0,.35),2px 2px 0 #440000,-1px -1px 0 #220000;
+  text-transform:uppercase;
 }
 html[data-theme="brootal"] .section-label{
-  font-family:Impact,'Arial Black',sans-serif;font-size:11px;letter-spacing:.35em;
-  color:#cc0000;text-shadow:1px 1px 0 #440000;
-  border-bottom:1px solid #330000;padding-bottom:6px;margin-bottom:10px;
+  font-family:Impact,'Arial Black',sans-serif;font-size:12px;letter-spacing:.4em;
+  color:#cc0000;text-shadow:1px 1px 0 #440000;text-transform:uppercase;
+  border-bottom:2px solid #440000;padding-bottom:5px;margin-bottom:10px;
 }
-html[data-theme="brootal"] .player-card,html[data-theme="brootal"] .right-panel{
-  border:1px solid #440000;border-top:2px solid #880000;
-  background:var(--surface);position:relative;overflow:hidden;
+html[data-theme="brootal"] .player-card{
+  border:2px solid #550000;border-top:3px solid #aa0000;
+  background:var(--surface);position:relative;overflow:visible;
+  box-shadow:3px 3px 0 #330000,6px 6px 0 #1a0000;
 }
-/* Scratchy overlay on cards */
-html[data-theme="brootal"] .player-card::after,html[data-theme="brootal"] .right-panel::after{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0.2 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
+html[data-theme="brootal"] .right-panel{
+  border-left:2px solid #550000;border-top:0;
+  background:var(--surface);position:relative;
 }
-html[data-theme="brootal"] .player-card>*,html[data-theme="brootal"] .right-panel>*{position:relative;z-index:1}
-html[data-theme="brootal"] .splash-card,html[data-theme="brootal"] .settings-modal-inner,html[data-theme="brootal"] .perm-modal-inner,html[data-theme="brootal"] .gif-panel{
-  border:1px solid #660000;border-top:2px solid #aa0000;background:#050000;
+/* Noise + red scratch overlay on panels */
+html[data-theme="brootal"] .player-card::before,
+html[data-theme="brootal"] .right-panel::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.07;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0.3 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
+}
+/* Scratch lines decoration */
+html[data-theme="brootal"] .player-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,#aa0000 20%,transparent 40%,#660000 70%,transparent 100%);
+  z-index:1;
+}
+html[data-theme="brootal"] .player-card>*,
+html[data-theme="brootal"] .right-panel>*{position:relative;z-index:1}
+html[data-theme="brootal"] .splash-card,
+html[data-theme="brootal"] .settings-modal-inner,
+html[data-theme="brootal"] .perm-modal-inner,
+html[data-theme="brootal"] .gif-panel{
+  border:2px solid #660000;border-top:3px solid #cc0000;
+  background:#040000;
+  box-shadow:4px 4px 0 #330000,8px 8px 0 #1a0000;
 }
 html[data-theme="brootal"] .ctrl-btn{
-  background:var(--btn-bg);border:1px solid #660000;color:#cc4444;
-  box-shadow:1px 1px 0 #330000,inset 0 0 8px rgba(100,0,0,.2);
+  background:#080000;border:2px solid #660000;color:#dd4444;
+  box-shadow:2px 2px 0 #330000,inset 0 0 8px rgba(120,0,0,.3),inset 1px 1px 0 rgba(200,0,0,.1);
+  font-size:15px;
 }
-html[data-theme="brootal"] .ctrl-btn:hover{border-color:#ff0000;color:#ff4444;box-shadow:0 0 10px rgba(255,0,0,.4),1px 1px 0 #440000}
+html[data-theme="brootal"] .ctrl-btn:hover{
+  border-color:#ff0000;color:#ff5555;
+  box-shadow:0 0 12px rgba(255,0,0,.5),2px 2px 0 #440000;
+}
+html[data-theme="brootal"] .ctrl-btn:active{
+  box-shadow:inset 2px 2px 0 #330000,inset 0 0 8px rgba(100,0,0,.4);
+  transform:translate(1px,1px);
+}
 html[data-theme="brootal"] .ctrl-btn.pp{
   background:linear-gradient(180deg,#cc0000 0%,#880000 100%);
-  border:1px solid #ff4444;color:#fff;
-  box-shadow:0 0 14px rgba(255,0,0,.5),1px 1px 0 #440000;
+  border:2px solid #ff5555;color:#fff;
+  box-shadow:0 0 16px rgba(255,0,0,.55),2px 2px 0 #440000;
+  font-size:17px;
 }
+html[data-theme="brootal"] .ctrl-btn.pp:active{transform:translate(2px,2px);box-shadow:inset 2px 2px 4px rgba(0,0,0,.5)}
 html[data-theme="brootal"] .btn-primary{
   background:var(--btn-primary-bg);border:2px solid #ff4444;color:#fff;
-  box-shadow:2px 2px 0 #440000,0 0 12px rgba(200,0,0,.4);
-  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.1em;
+  box-shadow:3px 3px 0 #440000,0 0 14px rgba(200,0,0,.4);
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.15em;text-transform:uppercase;font-size:15px;
 }
+html[data-theme="brootal"] .btn-primary:hover{box-shadow:3px 3px 0 #440000,0 0 20px rgba(255,0,0,.5)}
+html[data-theme="brootal"] .btn-primary:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #440000}
 html[data-theme="brootal"] .btn-secondary{
-  background:var(--btn-bg);border:1px solid #660000;color:#cc4444;
-  box-shadow:1px 1px 0 #330000;
+  background:#080000;border:2px solid #660000;color:#dd4444;
+  box-shadow:2px 2px 0 #330000;
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.1em;text-transform:uppercase;
 }
-html[data-theme="brootal"] .btn-secondary:hover{border-color:#ff0000;color:#ff4444;box-shadow:0 0 8px rgba(200,0,0,.3)}
+html[data-theme="brootal"] .btn-secondary:hover{border-color:#ff0000;color:#ff5555;box-shadow:0 0 8px rgba(200,0,0,.35),2px 2px 0 #440000}
+html[data-theme="brootal"] .btn-secondary:active{transform:translate(1px,1px)}
 html[data-theme="brootal"] input[type="text"]{
-  background:#030000;border:1px solid #550000;color:#e8cccc;
-  box-shadow:inset 0 0 12px rgba(100,0,0,.2),inset 1px 1px 0 rgba(0,0,0,.5);
+  background:#030000;border:2px solid #550000;color:#e8cccc;
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.06em;font-size:13px;
+  box-shadow:inset 0 0 14px rgba(100,0,0,.25),inset 2px 2px 0 rgba(0,0,0,.6),2px 2px 0 #220000;
 }
+html[data-theme="brootal"] input[type="text"]:focus{border-color:#ff0000;box-shadow:inset 0 0 10px rgba(150,0,0,.3),0 0 8px rgba(200,0,0,.2),inset 2px 2px 0 rgba(0,0,0,.5)}
 html[data-theme="brootal"] .chat-send{
-  background:linear-gradient(180deg,#cc0000,#880000);
-  border:1px solid #ff4444;color:#fff;box-shadow:1px 1px 0 #440000,0 0 8px rgba(180,0,0,.4);
+  background:linear-gradient(180deg,#cc0000,#770000);
+  border:2px solid #ff4444;color:#fff;
+  box-shadow:2px 2px 0 #440000,0 0 10px rgba(180,0,0,.4);
 }
+html[data-theme="brootal"] .chat-send:active{transform:translate(1px,1px)}
 html[data-theme="brootal"] .rx-btn{
-  background:var(--btn-bg);border:1px solid #550000;box-shadow:1px 1px 0 #330000;
+  background:#080000;border:2px solid #550000;
+  box-shadow:2px 2px 0 #330000;font-size:16px;
 }
-html[data-theme="brootal"] .rx-btn:hover{border-color:#ff0000;box-shadow:0 0 8px rgba(200,0,0,.4)}
+html[data-theme="brootal"] .rx-btn:hover{border-color:#ff0000;box-shadow:0 0 10px rgba(200,0,0,.5),2px 2px 0 #440000}
 html[data-theme="brootal"] .icon-btn{
-  background:var(--btn-bg);border:1px solid #550000;color:#cc4444;box-shadow:1px 1px 0 #330000;
+  background:#080000;border:2px solid #550000;color:#cc4444;
+  box-shadow:2px 2px 0 #330000;
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.08em;
 }
-html[data-theme="brootal"] .now-playing-bar,html[data-theme="brootal"] .controls,html[data-theme="brootal"] .listener-bar,
-html[data-theme="brootal"] .panel-tab,html[data-theme="brootal"] .chat-input-row,html[data-theme="brootal"] .reactions-bar{border-color:#330000}
+html[data-theme="brootal"] .icon-btn:hover{border-color:#ff0000;color:#ff5555;box-shadow:0 0 8px rgba(200,0,0,.4),2px 2px 0 #440000}
+html[data-theme="brootal"] .now-playing-bar,
+html[data-theme="brootal"] .controls,
+html[data-theme="brootal"] .listener-bar{border-color:#440000;border-width:1px 0}
 html[data-theme="brootal"] .panel-tab{
-  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.25em;font-size:11px;
-  color:#aa0000;border-bottom:2px solid #440000;
-  background:linear-gradient(180deg,#0a0000,#050000);
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.35em;font-size:12px;
+  color:#cc0000;text-transform:uppercase;
+  border-bottom:3px solid #550000;
+  background:linear-gradient(180deg,#0d0000,#060000);
+  text-shadow:1px 1px 0 #330000;
 }
-html[data-theme="brootal"] .queue-item.active{background:rgba(150,0,0,.12);border-left:2px solid #ff0000;border-color:#440000}
-html[data-theme="brootal"] .queue-item:hover{background:rgba(60,0,0,.3);border-color:#440000}
-html[data-theme="brootal"] .logo-dot{background:#ff0000;box-shadow:0 0 10px #ff0000,0 0 20px rgba(255,0,0,.5)}
-html[data-theme="brootal"] .np-dot{background:#ff0000;box-shadow:0 0 8px rgba(255,0,0,.7)}
-html[data-theme="brootal"] .role-badge.host{color:#ff4444;text-shadow:0 0 8px rgba(255,0,0,.6);background:rgba(150,0,0,.2)}
-html[data-theme="brootal"] .l-host{color:#ff4444;text-shadow:0 0 8px rgba(200,0,0,.6)}
-html[data-theme="brootal"] .online-dot{background:#ff0000;box-shadow:0 0 6px rgba(255,0,0,.7)}
-html[data-theme="brootal"] .session-pill{border-color:#440000;background:#050000;color:#994444;box-shadow:1px 1px 0 #330000}
-html[data-theme="brootal"] .tag-live{background:rgba(200,0,0,.15);color:#ff4444;border:1px solid #440000}
-html[data-theme="brootal"] .chat-msg.system .chat-msg-text{color:#883333;font-family:var(--font-mono)}
-html[data-theme="brootal"] .chat-msg.pinged{background:rgba(150,0,0,.1);border-left:2px solid #ff0000}
-html[data-theme="brootal"] .ping{color:#ff4444;text-shadow:0 0 8px rgba(255,0,0,.5)}
-html[data-theme="brootal"] .empty-queue{color:#440000;font-family:Impact,sans-serif;letter-spacing:.2em}
-html[data-theme="brootal"] .widget-empty{color:#440000;font-family:Impact,sans-serif;letter-spacing:.2em}
-html[data-theme="brootal"] .section-pill{background:#050000;border:1px solid #440000}
-/* Star decoration in Brootal */
-html[data-theme="brootal"] .now-playing-bar::before{
-  content:'✦';position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  color:#440000;font-size:10px;opacity:.5;
+html[data-theme="brootal"] .queue-item{border-color:transparent;border-width:1px}
+html[data-theme="brootal"] .queue-item:hover{background:rgba(60,0,0,.4);border-color:#440000;box-shadow:inset 2px 0 0 #880000}
+html[data-theme="brootal"] .queue-item.active{
+  background:rgba(120,0,0,.15);border-color:#660000;
+  border-left:3px solid #ff0000;
+  box-shadow:inset 0 0 12px rgba(100,0,0,.2);
 }
-html[data-theme="brootal"] .now-playing-bar{position:relative}
+html[data-theme="brootal"] .q-title{font-family:Impact,'Arial Black',sans-serif;letter-spacing:.06em;font-size:12px}
+html[data-theme="brootal"] .l-item:hover,.l-item.clickable:hover{background:rgba(50,0,0,.4)}
+html[data-theme="brootal"] .chat-msg.pinged{border-left:3px solid #ff0000;background:rgba(120,0,0,.12)}
+html[data-theme="brootal"] .ping{color:#ff5555;text-shadow:0 0 8px rgba(255,0,0,.6)}
+html[data-theme="brootal"] .chat-msg.system .chat-msg-text{
+  color:#883333;font-family:Impact,'Arial Black',sans-serif;
+  letter-spacing:.12em;font-size:11px;text-transform:uppercase;
+}
+html[data-theme="brootal"] .empty-queue,.widget-empty{
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#440000;
+}
+html[data-theme="brootal"] .logo-dot{background:#ff0000;box-shadow:0 0 12px #ff0000,0 0 24px rgba(255,0,0,.4)}
+html[data-theme="brootal"] .np-dot{background:#ff0000;box-shadow:0 0 10px rgba(255,0,0,.8)}
+html[data-theme="brootal"] .role-badge.host{
+  color:#ff5555;text-shadow:0 0 8px rgba(255,0,0,.6);
+  background:rgba(150,0,0,.25);border:1px solid #550000;
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.15em;
+}
+html[data-theme="brootal"] .role-badge.listener{
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.15em;color:#993333;
+}
+html[data-theme="brootal"] .l-host{color:#ff5555;text-shadow:0 0 8px rgba(200,0,0,.6);font-family:Impact,sans-serif;letter-spacing:.2em}
+html[data-theme="brootal"] .online-dot{background:#ff0000;box-shadow:0 0 6px rgba(255,0,0,.8)}
+html[data-theme="brootal"] .session-pill{
+  border:2px solid #550000;background:#050000;color:#993333;
+  box-shadow:2px 2px 0 #330000;font-family:Impact,'Arial Black',sans-serif;
+}
+html[data-theme="brootal"] .tag-live{
+  background:rgba(200,0,0,.15);color:#ff5555;
+  border:2px solid #550000;letter-spacing:.2em;
+  text-shadow:0 0 8px rgba(200,0,0,.4);
+  font-family:Impact,'Arial Black',sans-serif;
+}
+html[data-theme="brootal"] .mention-opt,html[data-theme="brootal"] #mention-dropdown{
+  border-color:#660000;background:#040000;
+  font-family:Impact,'Arial Black',sans-serif;letter-spacing:.06em;
+}
+html[data-theme="brootal"] .mention-opt:hover{background:#0d0000;color:#ff5555}
+html[data-theme="brootal"] .reactions-bar{
+  border-top:2px solid #440000;
+  background:linear-gradient(180deg,#060000,#030000);
+}
+html[data-theme="brootal"] .chat-input-row{
+  border-top:2px solid #440000;background:#040000;
+}
+html[data-theme="brootal"] .now-playing-bar{
+  position:relative;
+  background:linear-gradient(180deg,#0d0000,#080000);
+  border-bottom:2px solid #440000;
+}
+html[data-theme="brootal"] .controls{
+  background:linear-gradient(180deg,#0a0000,#060000);
+  border-top:2px solid #440000;
+}
+/* Star/X decorative elements */
+html[data-theme="brootal"] .now-playing-bar::after{
+  content:'✦ ✦';position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  color:#440000;font-size:10px;letter-spacing:8px;
+}
+html[data-theme="brootal"] .section-label::after{
+  content:' ///';color:#330000;
+}
+html[data-theme="brootal"] input[type="range"]{background:#330000}
+html[data-theme="brootal"] input[type="range"]::-webkit-slider-thumb{background:#ff0000;box-shadow:0 0 6px rgba(255,0,0,.5)}
 
 /* ═══ SHARED COMPONENTS ═══ */
 #splash{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:200;transition:opacity .4s;overflow-y:auto;padding:20px}
@@ -412,7 +518,7 @@ html[data-theme="brootal"] .theme-card.selected{border-color:#ff0000;box-shadow:
 .tp-light{background:#f0f0f0}.tp-light .tp-bar{background:#fff;color:#ff5500}.tp-light .tp-line{background:#ddd}.tp-light .tp-btn{background:#ff5500}
 .tp-aero{background:linear-gradient(150deg,#1a6acf,#061d4a)}.tp-aero .tp-bar{background:rgba(160,205,255,.2);color:#7fc8ff;border-bottom:1px solid rgba(255,255,255,.2)}.tp-aero .tp-line{background:rgba(255,255,255,.25)}.tp-aero .tp-btn{background:linear-gradient(180deg,#6ac0ff,#0050c0)}
 .tp-sunday{background:linear-gradient(150deg,#ede0cd,#d4c8b0)}.tp-sunday .tp-bar{background:rgba(255,252,245,.8);color:#d95e20;border-bottom:1px solid #c8bba8}.tp-sunday .tp-line{background:#c8bba8}.tp-sunday .tp-btn{background:linear-gradient(180deg,#f0894a,#b84010)}
-.tp-brootal{background:#000;font-family:Impact,sans-serif}.tp-brootal .tp-bar{background:#080000;color:#ff0000;border-bottom:2px solid #440000;letter-spacing:.2em}.tp-brootal .tp-line{background:#330000}.tp-brootal .tp-btn{background:linear-gradient(180deg,#ff0000,#660000)}
+.tp-brootal{background:#000;font-family:Impact,sans-serif}.tp-brootal .tp-bar{background:#080000;color:#ff0000;border-bottom:3px solid #550000;letter-spacing:.25em;text-shadow:0 0 6px #ff0000}.tp-brootal .tp-line{background:#330000;box-shadow:0 0 2px rgba(200,0,0,.3)}.tp-brootal .tp-btn{background:linear-gradient(180deg,#ff0000,#660000);box-shadow:1px 1px 0 #440000}
 .theme-card-label{padding:6px 10px;font-size:11px;font-weight:500;background:var(--surface2);border-top:1px solid var(--border)}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
 .toggle-row:last-child{border-bottom:none}
@@ -483,7 +589,8 @@ html[data-theme="brootal"] .theme-card.selected{border-color:#ff0000;box-shadow:
       <label class="toggle"><input type="checkbox" id="perm-add-chk" onchange="savePerm('canAdd',this.checked)"><span class="toggle-slider"></span></label></div>
     <div class="toggle-row"><div><div class="toggle-label">Can control playback</div></div>
       <label class="toggle"><input type="checkbox" id="perm-ctrl-chk" onchange="savePerm('canControl',this.checked)"><span class="toggle-slider"></span></label></div>
-    <div style="margin-top:14px;display:flex;justify-content:flex-end">
+    <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <button onclick="transferHost(permUid)" style="padding:8px 14px;font-size:12px;font-family:var(--font-mono);background:transparent;border:1px solid var(--border2);color:var(--text-muted);cursor:pointer;border-radius:4px;letter-spacing:.05em;transition:all .15s" onmouseover="this.style.borderColor='#ff4444';this.style.color='#ff4444'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text-muted)'">👑 Make Host</button>
       <button class="btn btn-secondary" style="width:auto;padding:8px 16px" onclick="closePermBtn()">Done</button>
     </div>
   </div>
@@ -542,6 +649,7 @@ html[data-theme="brootal"] .theme-card.selected{border-color:#ff0000;box-shadow:
           </div>
           <div class="listener-bar" id="listener-controls" style="display:none">
             <span>⟳ Synced to host</span>
+            <button onclick="syncWithHost()" style="margin-left:8px;padding:5px 10px;font-size:11px;font-family:var(--font-mono);background:var(--surface2);border:1px solid var(--border2);color:var(--text-muted);cursor:pointer;border-radius:4px;letter-spacing:.08em;transition:all .15s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text-muted)'">⟳ SYNC</button>
             <div class="vol-wrap" style="margin-left:auto">🔊<input type="range" min="0" max="100" value="80" oninput="setVolumeLocal(this.value)"></div>
           </div>
         </div>
@@ -603,8 +711,9 @@ const FIREBASE_CONFIG={apiKey:"AIzaSyD1RQSEoEz8-RXQs3b4mrhcpQU9bBNBl4c",authDoma
 const fbApp=initializeApp(FIREBASE_CONFIG);
 const db=getDatabase(fbApp);
 const TENOR_KEY='LIVDSRZULELA';
-const DRIFT_THRESHOLD=3500;  // ms — seek listener if they drift more than this
-const HEARTBEAT_MS=6000;     // host pushes position every 6s
+const DRIFT_HARD=250;        // ms — hard seek if drift exceeds this
+const DRIFT_SOFT=80;         // ms — soft correction if drift exceeds this
+const HEARTBEAT_MS=400;      // host pushes position every 400ms
 const PRESENCE_HB_MS=12000;  // presence heartbeat every 12s
 const HOST_TIMEOUT_MS=30000; // promote new host after this
 
@@ -624,6 +733,7 @@ let pendingPb=null;
 let listenersDB={},sessionPerms={};
 let sessionSettings={theme:'dark',customEnabled:true,waveColor:'#ff0000',waveStrength:80,waveSpeed:5};
 let waveRaf=null,gifOpen=false,permUid=null;
+let wavePos=0,waveAmplMult=0,waveAmplTarget=0; // waveform state
 let prevListeners={};         // for join/leave detection
 let presenceLog={};           // uid_action -> {chatKey,count,ts}
 let hostTransferTimer=null;
@@ -707,10 +817,15 @@ function buildIframe(url){
   document.getElementById('widget-empty')?.remove();
   document.getElementById('mobile-tap-overlay')?.remove();
   wrap.querySelector('iframe')?.remove();
+  wrap.querySelector('#widget-block')?.remove();
   const iframe=document.createElement('iframe');iframe.id='sc-widget';iframe.allow='autoplay';
   iframe.src=`https://w.soundcloud.com/player/?url=${encodeURIComponent(url)}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true`;
   iframe.style.cssText='display:block;width:100%;height:260px;border:none;';
   wrap.insertBefore(iframe,document.getElementById('waveform-canvas'));
+  // Block overlay for non-controllers (prevents clicking SC widget controls)
+  const block=document.createElement('div');block.id='widget-block';
+  block.style.cssText='position:absolute;inset:0;z-index:5;cursor:not-allowed;display:none;';
+  wrap.appendChild(block);
   return iframe;
 }
 
@@ -730,6 +845,7 @@ function showMobileTapOverlay(){
 
 function initWidget(url,autoPlay,seekMs){
   widgetReady=false;widgetCurrentUrl=url;widget=null;
+  wavePos=0;waveAmplMult=0;waveAmplTarget=0;
   widgetInitTime=Date.now();
   const iframe=buildIframe(url);
   setTimeout(()=>{
@@ -745,24 +861,36 @@ function initWidget(url,autoPlay,seekMs){
       if(autoPlay){
         setTimeout(()=>{
           suppressEvt=false;
-          if(!IS_HOST&&isMobile&&!audioEnabled){showMobileTapOverlay();IS_PLAYING=true;updatePlayBtn();return;}
+          if(!canControl()&&isMobile&&!audioEnabled){showMobileTapOverlay();IS_PLAYING=true;updatePlayBtn();return;}
           widget.play();IS_PLAYING=true;updatePlayBtn();updateWave();
         },200);
-      }else{setTimeout(()=>suppressEvt=false,400);}
+      }else{setTimeout(()=>suppressEvt=false,500);}
+      updateBlockOverlay();
     });
     widget.bind(SC.Widget.Events.FINISH,()=>{if(canControl())skipNext();});
+    // FIX: use canControl() not IS_HOST, capture ts before async getPosition
     widget.bind(SC.Widget.Events.PLAY,()=>{
-      if(IS_HOST&&!suppressEvt){
-        // Delay to get accurate position after seek
-        setTimeout(()=>pushState(true),120);
-      }
+      if(canControl()&&!suppressEvt)setTimeout(()=>pushState(true),80);
     });
     widget.bind(SC.Widget.Events.PAUSE,()=>{
-      if(IS_HOST&&!suppressEvt)pushState(false);
+      if(canControl()&&!suppressEvt)pushState(false);
     });
-    // PROGRESS event: gives current position, use for accurate state tracking
-    widget.bind(SC.Widget.Events.PLAY_PROGRESS,()=>{
-      // No-op — we use getPosition in pushState
+    // PLAY_PROGRESS: drive waveform amplitude from real playback position
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS,data=>{
+      if(!data)return;
+      wavePos=data.currentPosition||0;
+      if(IS_PLAYING){
+        // Position-anchored pseudo-amplitude: multiple sine waves keyed to song position
+        const t=wavePos/1000;
+        waveAmplTarget=Math.min(1,
+          0.35+
+          0.22*Math.abs(Math.sin(t*1.27))+
+          0.18*Math.abs(Math.sin(t*2.83+0.7))+
+          0.12*Math.abs(Math.sin(t*0.61+1.2))+
+          0.08*Math.abs(Math.sin(t*4.1+0.3))+
+          0.05*Math.random()
+        );
+      }else{waveAmplTarget=0;}
     });
   },600);
 }
@@ -871,12 +999,11 @@ function doJoin(){
 }
 
 /* ══════════════
-   LISTENER SYNC
-   Bugs fixed:
-   A. Seek on NEW track with elapsed-time compensation
-   B. Same track: only play/pause UNLESS drift > threshold
-   C. Mobile: show tap overlay before play
-   D. Race: pendingPb applied when queue arrives
+   LISTENER SYNC — v8 FIXES
+   A. renderQueue() called after CURRENT_IDX set → correct highlight
+   B. DRIFT_HARD(250ms)/DRIFT_SOFT(80ms) split correction
+   C. canControl() instead of IS_HOST for mobile tap check
+   D. pendingPb race handled in queue subscription
 ══════════════ */
 function handleListenerSync(pb){
   const tidx=pb.idx,shouldPlay=pb.playing,pbUrl=pb.url||'';
@@ -885,7 +1012,9 @@ function handleListenerSync(pb){
   const isNewTrack=(tidx!==CURRENT_IDX||pbUrl!==widgetCurrentUrl);
 
   if(isNewTrack){
-    CURRENT_IDX=tidx;updateNowPlaying(track);
+    CURRENT_IDX=tidx;
+    updateNowPlaying(track);
+    renderQueue(); // FIX: update highlight immediately
     const elapsed=Date.now()-pb.ts;
     const seekMs=(pb.position||0)+(shouldPlay?elapsed:0);
     initWidget(track.url,shouldPlay,seekMs);
@@ -893,20 +1022,30 @@ function handleListenerSync(pb){
     return;
   }
 
-  // Same track
+  // Same track — correct play/pause and drift
   if(!widgetReady){setTimeout(()=>handleListenerSync(pb),400);return;}
 
-  // Calculate how far off we are (if host seeked, drift will be large → seek)
-  const elapsed=Date.now()-pb.ts;
-  const expectedPos=(pb.position||0)+(shouldPlay?elapsed:0);
-
+  // FIX: capture elapsed BEFORE entering async getPosition
+  const syncTs=Date.now();
   widget.getPosition(currentPos=>{
-    const drift=Math.abs(expectedPos-currentPos);
-    if(drift>DRIFT_THRESHOLD){
+    const elapsed2=Date.now()-pb.ts;
+    const expectedPos=(pb.position||0)+(shouldPlay?elapsed2:0);
+    const drift=expectedPos-currentPos; // positive = listener is behind
+    const absDrift=Math.abs(drift);
+
+    if(absDrift>DRIFT_HARD){
+      // Hard seek: listener is too far out of sync
       suppressEvt=true;
       widget.seekTo(expectedPos);
+      setTimeout(()=>suppressEvt=false,500);
+    }else if(absDrift>DRIFT_SOFT){
+      // Soft correction: meet halfway to reduce audio glitch
+      suppressEvt=true;
+      widget.seekTo(currentPos+drift*0.6);
       setTimeout(()=>suppressEvt=false,400);
     }
+    // < DRIFT_SOFT: within acceptable tolerance, no seek
+
     if(shouldPlay&&!IS_PLAYING){
       if(isMobile&&!audioEnabled){showMobileTapOverlay();IS_PLAYING=true;updatePlayBtn();return;}
       suppressEvt=true;widget.play();IS_PLAYING=true;setTimeout(()=>suppressEvt=false,300);
@@ -918,15 +1057,30 @@ function handleListenerSync(pb){
 }
 
 function pushState(playing,idx,position){
-  if(!IS_HOST)return;
+  if(!canControl())return; // FIX: was IS_HOST — privileged non-hosts can push too
   if(idx===undefined)idx=CURRENT_IDX;
   const url=QUEUE[idx]?.url||'';
+  // FIX: capture timestamp BEFORE entering async getPosition callback
+  // so ts reflects when we decided to push, not when the callback fires
+  const capturedTs=Date.now();
   const doUp=pos=>update(ref(db,`sessions/${SESSION_ID}/playback`),{
     playing:playing!==undefined?playing:IS_PLAYING,idx,url,
-    position:position!==undefined?position:pos,ts:Date.now()
+    position:position!==undefined?position:Math.max(0,pos),
+    ts:capturedTs
   });
-  if(widget&&widgetReady)widget.getPosition(pos=>{doUp(Math.max(0,pos));});else doUp(position||0);
+  if(widget&&widgetReady)widget.getPosition(doUp);else doUp(position||0);
 }
+
+/* Sync with host — force-resync to current Firebase playback state */
+window.syncWithHost=async function(){
+  const snap=await get(ref(db,`sessions/${SESSION_ID}/playback`));
+  if(!snap.exists()){showToast('No playback data');return;}
+  const pb=snap.val();
+  // Force as new track to reset widget completely
+  widgetCurrentUrl='';CURRENT_IDX=-1;
+  handleListenerSync(pb);
+  showToast('Resynced ✓');
+};
 
 /* ── Host transfer ── */
 function startHostTransferCountdown(){
@@ -995,6 +1149,10 @@ function pushPresenceMsg(uid,name,action,ts){
 /* ── Privileges ── */
 function canControl(){return IS_HOST||(sessionPerms[MY_ID]?.canControl===true);}
 function canAdd(){return IS_HOST||(sessionPerms[MY_ID]?.canAdd===true);}
+function updateBlockOverlay(){
+  const block=document.getElementById('widget-block');
+  if(block)block.style.display=(!canControl()&&widgetCurrentUrl)?'block':'none';
+}
 function updatePrivUI(){
   document.getElementById('add-queue-section').style.display=canAdd()?'block':'none';
   if(IS_HOST||canControl()){
@@ -1004,6 +1162,7 @@ function updatePrivUI(){
     document.getElementById('host-controls').style.display='none';
     document.getElementById('listener-controls').style.display='flex';
   }
+  updateBlockOverlay();
 }
 
 /* ── Controls ── */
@@ -1022,21 +1181,49 @@ window.skipPrev=()=>{if(canControl()&&CURRENT_IDX-1>=0)playIndex(CURRENT_IDX-1);
 function playIndex(idx){
   if(idx<0||idx>=QUEUE.length)return;
   CURRENT_IDX=idx;IS_PLAYING=true;updateNowPlaying(QUEUE[idx]);
+  renderQueue(); // FIX: update highlight immediately, don't wait for Firebase echo
   initWidget(QUEUE[idx].url,true,0);updatePlayBtn();pushState(true,idx,0);updateWave();
 }
+
+/* Transfer host role to another user */
+window.transferHost=function(uid){
+  if(!IS_HOST||uid===MY_ID)return;
+  const l=listenersDB[uid];if(!l)return;
+  if(!confirm(`Transfer host to ${l.name}?`))return;
+  // Promote target
+  update(ref(db,`sessions/${SESSION_ID}`),{host:uid,hostLastSeen:Date.now()});
+  update(ref(db,`sessions/${SESSION_ID}/listeners/${uid}`),{isHost:true});
+  // Demote self
+  IS_HOST=false;
+  update(ref(db,`sessions/${SESSION_ID}/listeners/${MY_ID}`),{isHost:false});
+  listenersDB[MY_ID].isHost=false;
+  document.getElementById('top-role').textContent='Listener';
+  document.getElementById('top-role').className='role-badge listener';
+  closePermBtn();updatePrivUI();renderListeners();
+  showToast(`Host transferred to ${l.name}`);
+};
 window.setVolume=v=>{if(widgetReady)widget.setVolume(Number(v));};
 window.setVolumeLocal=v=>{if(widgetReady)widget.setVolume(Number(v));};
 
 /* ── Queue ── */
+/* Normalize mobile short links: on.soundcloud.com → soundcloud.com */
+function normalizeSCUrl(raw){
+  let u=raw.trim();
+  // Replace mobile app share short domain
+  u=u.replace(/^https?:\/\/on\.soundcloud\.com/,'https://soundcloud.com');
+  return u;
+}
+
 window.addToQueue=async function(){
   if(!canAdd())return;
   const inp=document.getElementById('inp-url');
-  const url=inp.value.trim();if(!url)return;
+  let url=inp.value.trim();if(!url)return;
+  url=normalizeSCUrl(url);
   if(!url.includes('soundcloud.com')){showToast('Paste a SoundCloud URL');return;}
   inp.value='';
   const title=await resolveSCTitle(url);
   await set(push(ref(db,`sessions/${SESSION_ID}/queue`)),{url,title,order:QUEUE.length,addedBy:MY_ID});
-  if(CURRENT_IDX<0&&IS_HOST)setTimeout(()=>playIndex(0),200);
+  if(CURRENT_IDX<0&&canControl())setTimeout(()=>playIndex(0),200);
 };
 async function resolveSCTitle(url){
   try{const r=await fetch(`https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`);const j=await r.json();return j.title||url;}catch{return url;}
@@ -1193,7 +1380,7 @@ function syncSettingsUI(){
 }
 function applyTheme(name){document.documentElement.setAttribute('data-theme',name||'dark');updateWave();}
 
-/* ── EKG Waveform ── */
+/* ── EKG Waveform — driven by PLAY_PROGRESS position data ── */
 function updateWave(){
   const active=sessionSettings.theme==='brootal'&&widgetCurrentUrl;
   if(active)startWave();else stopWave();
@@ -1208,56 +1395,49 @@ function startWave(){
     canvas.width=W;canvas.height=H;
     const ctx=canvas.getContext('2d');
     ctx.clearRect(0,0,W,H);
-    const t=Date.now()/1000;
     const col=sessionSettings.waveColor||'#ff0000';
     const spd=sessionSettings.waveSpeed/5;
-    const amp=(sessionSettings.waveStrength/100)*H*0.42;
-    const scrollOffset=(t*spd*80)%350;
-
-    ctx.lineWidth=1.5;
+    // Smoothly interpolate amplitude multiplier toward target
+    waveAmplMult+=(waveAmplTarget-waveAmplMult)*0.12;
+    const amp=(sessionSettings.waveStrength/100)*H*0.44*waveAmplMult;
+    // Scroll speed uses wavePos (position-anchored) + wall clock for smooth scroll between updates
+    const scrollT=(wavePos/1000+Date.now()/3000)*spd;
+    const scrollOffset=(scrollT*80)%350;
+    ctx.lineWidth=IS_PLAYING?1.8:1;
     ctx.strokeStyle=col;
     ctx.shadowColor=col;
-    ctx.shadowBlur=IS_PLAYING?6:2;
+    ctx.shadowBlur=IS_PLAYING?Math.max(3,8*waveAmplMult):1;
     ctx.beginPath();
-
     const baseY=H*0.6;
     let first=true;
     for(let x=0;x<W+1;x++){
       const phase=(x+scrollOffset)%350;
       let y=baseY;
-      // EKG pattern: flat → P-wave bump → flat → sharp QRS spike → dip → small bump → flat
       if(phase<100){
-        // flat baseline with subtle noise
-        y=baseY+(Math.sin(phase*0.3)*2);
+        y=baseY+Math.sin(phase*0.3)*1.5;
       }else if(phase<115){
-        // P-wave: small bump
         const t2=(phase-100)/15;
         y=baseY-Math.sin(t2*Math.PI)*amp*0.18;
       }else if(phase<145){
-        // flat
-        y=baseY+(Math.sin(phase*0.2)*1.5);
+        y=baseY+Math.sin(phase*0.2)*1.2;
       }else if(phase<152){
-        // Q: slight dip
         const t2=(phase-145)/7;
         y=baseY+Math.sin(t2*Math.PI)*amp*0.12;
       }else if(phase<157){
-        // R: sharp spike UP
+        // R spike UP — height driven by waveAmplMult
         const t2=(phase-152)/5;
-        y=baseY-t2*amp*(IS_PLAYING?1:.3);
+        y=baseY-t2*amp;
       }else if(phase<162){
-        // R down
         const t2=(phase-157)/5;
-        y=baseY-amp*(1-t2)*(IS_PLAYING?1:.3);
+        y=baseY-amp*(1-t2);
       }else if(phase<170){
-        // S: dip below
         const t2=(phase-162)/8;
-        y=baseY+Math.sin(t2*Math.PI)*amp*0.25;
+        y=baseY+Math.sin(t2*Math.PI)*amp*0.28;
       }else if(phase<200){
-        // T-wave: small bump
         const t2=(phase-170)/30;
-        y=baseY-Math.sin(t2*Math.PI)*amp*0.2;
+        y=baseY-Math.sin(t2*Math.PI)*amp*0.22;
       }else{
-        y=baseY+(Math.sin(phase*0.1)*1.5);
+        y=baseY+Math.sin(phase*0.1)*1.2;
       }
       if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);
     }
@@ -1270,6 +1450,7 @@ function stopWave(){
   if(waveRaf){cancelAnimationFrame(waveRaf);waveRaf=null;}
   const canvas=document.getElementById('waveform-canvas');
   if(canvas)canvas.style.display='none';
+  waveAmplTarget=0;
 }
 
 /* ── Settings modal ── */
