@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>SoundSync</title>
+<title>SoundSync — Listen Together</title>
+<!-- Favicon: inline SVG with music note -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23ff5500'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' font-family='serif' fill='white'%3E%E2%99%AB%3C/text%3E%3C/svg%3E">
+<!-- Open Graph / Social embed preview -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SoundSync">
+<meta property="og:title" content="Join my session on SoundSync">
+<meta property="og:description" content="Listen together in real-time — synced queues, live reactions, shared playback. No account needed.">
+<meta property="og:image" content="https://og-image-service.vercel.app/SoundSync.png?theme=dark&md=1&fontSize=100px&images=https%3A%2F%2Fimg.icons8.com%2Fcolor%2F96%2Fmusic.png">
+<meta property="og:url" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Join my session on SoundSync">
+<meta name="twitter:description" content="Listen together in real-time — synced queues, live reactions, shared playback.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -544,6 +556,162 @@ html[data-theme="brootal"] .theme-card.selected{border-color:#ff0000;box-shadow:
 .floating-rx{position:absolute;bottom:80px;font-size:32px;animation:floatUp 2.8s ease-out forwards;pointer-events:none;user-select:none;will-change:transform,opacity}
 @keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:1}60%{opacity:.9}100%{transform:translateY(-68vh) scale(.55) rotate(var(--rx-rot,8deg));opacity:0}}
 
+/* ═══ SOUNDLEAK ═══ — early 2000s LiveLeak aesthetic */
+html[data-theme="soundleak"]{
+  --bg:#2e2e2e;
+  --surface:#e8e2d0;
+  --surface2:#d5cfba;
+  --border:#8b7d5e;
+  --border2:#6b5c40;
+  --text:#1a1208;
+  --text-muted:#5c4e30;
+  --text-dim:#9a8c6a;
+  --accent:#cc4400;
+  --accent-dim:rgba(204,68,0,.12);
+  --green:#4a7020;
+  --radius:0;
+  --card-shadow:1px 1px 3px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.5);
+  --btn-bg:#c8bea0;
+  --btn-border:#8b7d5e;
+  --btn-color:#1a1208;
+  --btn-primary-bg:#cc4400;
+  --btn-primary-color:#fff;
+  --input-bg:#f5f0e0;
+  --font-ui:Arial,Helvetica,Verdana,sans-serif;
+  --font-mono:'Courier New',Courier,monospace;
+}
+html[data-theme="soundleak"] *{border-radius:0!important}
+html[data-theme="soundleak"] body{
+  background:#2e2e2e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='1' height='1' fill='rgba(0,0,0,0.15)'/%3E%3C/svg%3E") repeat;
+  font-family:var(--font-ui);font-size:12px;
+  min-height:100vh;
+}
+html[data-theme="soundleak"] .topbar{
+  background:linear-gradient(180deg,#4a3c28 0%,#3a2e1c 100%);
+  border-bottom:2px solid #cc4400;
+  height:44px;
+}
+html[data-theme="soundleak"] .topbar-logo{
+  font-family:'Courier New',Courier,monospace;font-size:14px;
+  font-weight:bold;letter-spacing:.05em;color:#ff6600;
+  text-shadow:1px 1px 0 rgba(0,0,0,.6);
+}
+/* The "SoundLeak" logo badge */
+html[data-theme="soundleak"] .topbar-logo::before{
+  content:'[SL]';background:#cc4400;color:#fff;
+  font-family:'Courier New',monospace;font-size:10px;font-weight:bold;
+  padding:1px 4px;margin-right:6px;border:1px solid #ff6600;
+}
+html[data-theme="soundleak"] .session-pill{
+  background:#1a1208;border:1px solid #8b7d5e;color:#cc9966;
+  font-family:'Courier New',monospace;font-size:10px;
+}
+html[data-theme="soundleak"] .tag-live{
+  background:#8b0000;color:#ffcc00;border:1px solid #ff6600;
+  font-family:'Courier New',monospace;font-size:9px;font-weight:bold;
+}
+html[data-theme="soundleak"] .player-card,html[data-theme="soundleak"] .right-panel{
+  background:var(--surface);border:1px solid var(--border);border-top:2px solid #8b7d5e;
+  box-shadow:var(--card-shadow);
+}
+html[data-theme="soundleak"] .splash-card,html[data-theme="soundleak"] .settings-modal-inner,
+html[data-theme="soundleak"] .perm-modal-inner,html[data-theme="soundleak"] .gif-panel{
+  background:var(--surface);border:2px solid var(--border);
+  box-shadow:2px 2px 4px rgba(0,0,0,.4);
+}
+html[data-theme="soundleak"] .now-playing-bar{
+  background:linear-gradient(180deg,#c8bea0,#b8ae90);
+  border-bottom:1px solid var(--border);
+}
+html[data-theme="soundleak"] .controls{
+  background:linear-gradient(180deg,#d5cfba,#c8bea0);
+  border-top:1px solid var(--border);
+}
+html[data-theme="soundleak"] .panel-tab{
+  background:linear-gradient(180deg,#6b5c40,#5a4c32);
+  color:#e8d8b0;font-family:'Courier New',monospace;font-size:10px;
+  border-bottom:1px solid #3a2e1c;letter-spacing:.12em;font-weight:bold;
+}
+html[data-theme="soundleak"] .ctrl-btn{
+  background:linear-gradient(180deg,#d8d0b8 0%,#b8b098 100%);
+  border:1px solid #8b7d5e;color:#1a1208;
+  box-shadow:1px 1px 0 rgba(255,255,255,.6) inset,1px 1px 2px rgba(0,0,0,.3);
+  font-size:12px;
+}
+html[data-theme="soundleak"] .ctrl-btn:hover{background:linear-gradient(180deg,#e8e0c8,#c8c0a8);border-color:#cc4400}
+html[data-theme="soundleak"] .ctrl-btn:active{box-shadow:inset 1px 1px 3px rgba(0,0,0,.4);transform:translate(1px,1px)}
+html[data-theme="soundleak"] .ctrl-btn.pp{
+  background:linear-gradient(180deg,#ee5500 0%,#aa3300 100%);
+  border:1px solid #882200;color:#fff;
+  box-shadow:1px 1px 0 rgba(255,150,80,.4) inset,1px 1px 3px rgba(0,0,0,.4);
+}
+html[data-theme="soundleak"] .ctrl-btn.pp:hover{background:linear-gradient(180deg,#ff6600,#cc4400)}
+html[data-theme="soundleak"] .btn-primary{
+  background:linear-gradient(180deg,#dd5500,#aa3300);
+  border:1px solid #882200;color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,150,80,.35),1px 1px 2px rgba(0,0,0,.3);
+  font-weight:bold;font-size:12px;
+}
+html[data-theme="soundleak"] .btn-secondary{
+  background:linear-gradient(180deg,#d0c8b0,#b8b098);
+  border:1px solid #8b7d5e;color:#1a1208;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),1px 1px 2px rgba(0,0,0,.2);
+  font-size:12px;
+}
+html[data-theme="soundleak"] .btn-secondary:hover{border-color:#cc4400;background:linear-gradient(180deg,#ddd8c0,#c8c0a8)}
+html[data-theme="soundleak"] input[type="text"]{
+  background:var(--input-bg);border:1px solid #8b7d5e;color:#1a1208;font-size:12px;
+  box-shadow:inset 1px 1px 3px rgba(0,0,0,.15);
+}
+html[data-theme="soundleak"] input[type="text"]:focus{border-color:#cc4400;outline:none}
+html[data-theme="soundleak"] .chat-send{
+  background:linear-gradient(180deg,#dd5500,#aa3300);
+  border:1px solid #882200;color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,150,80,.3);
+}
+html[data-theme="soundleak"] .rx-btn{
+  background:linear-gradient(180deg,#d0c8b0,#b8b098);
+  border:1px solid #8b7d5e;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),1px 1px 1px rgba(0,0,0,.2);
+}
+html[data-theme="soundleak"] .icon-btn{
+  background:linear-gradient(180deg,#c0b898,#a8a080);
+  border:1px solid #6b5c40;color:#3a2e1c;
+}
+html[data-theme="soundleak"] .queue-item{border-bottom:1px dotted #c8bea0}
+html[data-theme="soundleak"] .queue-item:hover{background:#d5ceb8}
+html[data-theme="soundleak"] .queue-item.active{background:#ffe8c8;border-left:3px solid #cc4400}
+html[data-theme="soundleak"] .np-dot{background:#cc4400}
+html[data-theme="soundleak"] .logo-dot{background:#cc4400}
+html[data-theme="soundleak"] .role-badge.host{background:#8b0000;color:#ffcc00;border:1px solid #cc4400}
+html[data-theme="soundleak"] .role-badge.listener{background:#3a3020;color:#c8b890}
+html[data-theme="soundleak"] .l-host{color:#cc4400;font-weight:bold}
+html[data-theme="soundleak"] .online-dot{background:#4a7020}
+html[data-theme="soundleak"] .chat-msg.system .chat-msg-text{color:#5c4e30;font-family:'Courier New',monospace;font-size:10px}
+html[data-theme="soundleak"] .chat-msg.pinged{background:#fff0d8;border-left:2px solid #cc4400}
+html[data-theme="soundleak"] .ping{color:#cc4400;font-weight:bold}
+html[data-theme="soundleak"] .section-label{color:#5c4e30;font-family:'Courier New',monospace;border-bottom:1px solid #c8bea0;padding-bottom:4px;margin-bottom:8px}
+html[data-theme="soundleak"] .empty-queue{color:#9a8c6a;font-family:'Courier New',monospace}
+html[data-theme="soundleak"] .widget-empty{color:#9a8c6a;font-family:'Courier New',monospace}
+html[data-theme="soundleak"] .reactions-bar{background:#d5cfba;border-top:1px solid #c0b898}
+html[data-theme="soundleak"] .chat-input-row{background:#ddd8c8;border-top:1px solid #c0b898}
+html[data-theme="soundleak"] .chat-messages{background:#f0ece0}
+html[data-theme="soundleak"] .listeners-list{background:#eae4d0}
+/* SoundLeak video-site watermark detail */
+html[data-theme="soundleak"] .widget-wrap{background:#1a1208;position:relative}
+html[data-theme="soundleak"] .widget-wrap::after{
+  content:'SoundLeak.com';position:absolute;bottom:6px;right:8px;
+  font-family:'Courier New',monospace;font-size:9px;color:rgba(255,150,50,.4);
+  pointer-events:none;z-index:6;letter-spacing:.05em;
+}
+/* Tp preview */
+.tp-soundleak{background:#2e2e2e}
+.tp-soundleak .tp-bar{background:#4a3c28;color:#ff6600;border-bottom:2px solid #cc4400;font-family:'Courier New',monospace;font-size:7px;letter-spacing:.05em}
+.tp-soundleak .tp-body{background:#e8e2d0}
+.tp-soundleak .tp-line{background:#b8ae90}
+.tp-soundleak .tp-btn{background:linear-gradient(180deg,#dd5500,#aa3300)}
+
+/* Toast */
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:9px 16px;font-size:13px;font-family:var(--font-mono);z-index:300;opacity:0;transition:all .22s;white-space:nowrap;pointer-events:none}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
@@ -590,7 +758,7 @@ html[data-theme="brootal"] .theme-card.selected{border-color:#ff0000;box-shadow:
     <div class="toggle-row"><div><div class="toggle-label">Can control playback</div></div>
       <label class="toggle"><input type="checkbox" id="perm-ctrl-chk" onchange="savePerm('canControl',this.checked)"><span class="toggle-slider"></span></label></div>
     <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:8px">
-      <button onclick="transferHost(permUid)" style="padding:8px 14px;font-size:12px;font-family:var(--font-mono);background:transparent;border:1px solid var(--border2);color:var(--text-muted);cursor:pointer;border-radius:4px;letter-spacing:.05em;transition:all .15s" onmouseover="this.style.borderColor='#ff4444';this.style.color='#ff4444'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text-muted)'">👑 Make Host</button>
+      <button onclick="transferHostCurrent()" style="padding:8px 14px;font-size:12px;font-family:var(--font-mono);background:transparent;border:1px solid var(--border2);color:var(--text-muted);cursor:pointer;border-radius:4px;letter-spacing:.05em;transition:all .15s" onmouseover="this.style.borderColor='#ff4444';this.style.color='#ff4444'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text-muted)'">👑 Make Host</button>
       <button class="btn btn-secondary" style="width:auto;padding:8px 16px" onclick="closePermBtn()">Done</button>
     </div>
   </div>
@@ -658,8 +826,11 @@ html[data-theme="brootal"] .theme-card.selected{border-color:#ff0000;box-shadow:
       <div id="add-queue-section" style="display:none">
         <div class="section-label">Add to queue</div>
         <div class="add-bar">
-          <input type="text" id="inp-url" placeholder="Paste a SoundCloud URL…" autocomplete="off" onkeydown="if(event.key==='Enter')addToQueue()">
+          <input type="text" id="inp-url" placeholder="Paste a SoundCloud URL or playlist…" autocomplete="off" onkeydown="if(event.key==='Enter')addToQueue()">
           <button class="btn btn-secondary" onclick="addToQueue()">Add</button>
+        </div>
+        <div id="playlist-hint" style="display:none;font-size:11px;color:var(--text-muted);margin-top:6px;font-family:var(--font-mono)">
+          📋 Playlist detected — will import all tracks
         </div>
       </div>
 
@@ -736,8 +907,12 @@ let waveRaf=null,gifOpen=false,permUid=null;
 let wavePos=0,waveAmplMult=0,waveAmplTarget=0; // waveform state
 let prevListeners={};         // for join/leave detection
 let presenceLog={};           // uid_action -> {chatKey,count,ts}
+const presenceDedup=new Set();// prevent duplicate presence events within 2s
+let nameCache={};             // uid→name, prevents "Someone" fallback
 let hostTransferTimer=null;
 let audioEnabled=false;       // mobile: has user gestured?
+let tabHiddenAt=0;            // for off-tab desync detection
+let joinedOnce=false;         // prevent doJoin() from running twice
 const isMobile=/Android|iPhone|iPad|iPod|webOS|BlackBerry/i.test(navigator.userAgent);
 
 /* ── Profile persistence (localStorage) ── */
@@ -918,11 +1093,17 @@ async function joinSessionById(id){
 }
 
 function doJoin(){
+  // Guard: prevent duplicate subscriptions if doJoin is somehow called twice
+  if(joinedOnce){console.warn('doJoin called twice — ignoring');return;}
+  joinedOnce=true;
+
   saveProfile();
   const presRef=ref(db,`sessions/${SESSION_ID}/listeners/${MY_ID}`);
   const presData={uid:MY_ID,name:MY_NAME,avatar:avPayload(),isHost:IS_HOST,joined:Date.now(),lastSeen:Date.now()};
   set(presRef,presData);
   onDisconnect(presRef).remove();
+  // Seed our own name in cache immediately
+  nameCache[MY_ID]=MY_NAME;
 
   // Presence heartbeat — prevents listener from disappearing due to stale data
   const presHB=setInterval(()=>{
@@ -957,8 +1138,11 @@ function doJoin(){
   /* Listeners subscription */
   onValue(ref(db,`sessions/${SESSION_ID}/listeners`),snap=>{
     const fresh=snap.val()||{};
-    // Ensure uid in object
-    Object.keys(fresh).forEach(k=>{if(!fresh[k].uid)fresh[k].uid=k;});
+    // Ensure uid in object and populate nameCache (prevents "Someone" fallback)
+    Object.keys(fresh).forEach(k=>{
+      if(!fresh[k].uid)fresh[k].uid=k;
+      if(fresh[k].name)nameCache[k]=fresh[k].name; // cache all valid names
+    });
     detectPresenceChanges(listenersDB,fresh);
     listenersDB=fresh;
     renderListeners();
@@ -994,6 +1178,31 @@ function doJoin(){
 
   /* Periodic sync push (host only) */
   setInterval(()=>{if(IS_HOST&&widgetReady&&IS_PLAYING)pushState(IS_PLAYING);},HEARTBEAT_MS);
+
+  /* Page Visibility — resync on tab refocus to fix off-tab desync */
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){
+      tabHiddenAt=Date.now();
+    }else{
+      if(!SESSION_ID)return;
+      const hiddenMs=Date.now()-tabHiddenAt;
+      if(hiddenMs<500)return; // ignore tiny blips
+      if(IS_HOST){
+        // Re-push so listeners can catch up (host may have drifted from their own push cadence)
+        if(widgetReady&&IS_PLAYING)setTimeout(()=>pushState(IS_PLAYING),300);
+      }else{
+        // Listener: force full resync from Firebase
+        setTimeout(async()=>{
+          const snap=await get(ref(db,`sessions/${SESSION_ID}/playback`));
+          if(!snap.exists())return;
+          const pb=snap.val();
+          // Only hard-resync if we were hidden long enough to drift
+          if(hiddenMs>1500){widgetCurrentUrl='';CURRENT_IDX=-1;}
+          handleListenerSync(pb);
+        },400);
+      }
+    }
+  },{once:false});
 
   launchApp();
 }
@@ -1119,26 +1328,36 @@ async function tryPromoteToHost(){
 
 /* ── Presence change detection ── */
 function detectPresenceChanges(prev,next){
-  if(!Object.keys(prev).length)return; // first load, no notifications
+  if(!Object.keys(prev).length)return; // first load, skip
   const now=Date.now();
-  // Joined
   for(const [uid,l] of Object.entries(next)){
-    if(!prev[uid])pushPresenceMsg(uid,l.name||'Someone','joined',now);
+    if(!prev[uid]){
+      // Use nameCache first (most up-to-date), then object, then fallback
+      const name=nameCache[uid]||l.name||'Unknown';
+      pushPresenceMsg(uid,name,'joined',now);
+    }
   }
-  // Left
   for(const [uid,l] of Object.entries(prev)){
-    if(!next[uid])pushPresenceMsg(uid,l.name||'Someone','left',now);
+    if(!next[uid]){
+      const name=nameCache[uid]||l.name||'Unknown';
+      pushPresenceMsg(uid,name,'left',now);
+    }
   }
 }
 function pushPresenceMsg(uid,name,action,ts){
+  // Dedup: skip if same uid+action fired within 2 seconds (handles Firebase rapid re-fires)
+  const dedupKey=`${uid}_${action}_${Math.floor(ts/2000)}`;
+  if(presenceDedup.has(dedupKey))return;
+  presenceDedup.add(dedupKey);
+  setTimeout(()=>presenceDedup.delete(dedupKey),3000);
+
   const key=`${uid}_${action}`;
   const recent=presenceLog[key];
-  const WINDOW=90000; // 90s stacking window
+  const WINDOW=90000;
   if(recent&&ts-recent.ts<WINDOW){
-    // Stack: increment count on existing message
     const count=(recent.count||1)+1;
     presenceLog[key]={...recent,count,ts};
-    update(ref(db,`sessions/${SESSION_ID}/chat/${recent.chatKey}`),{count,ts});
+    update(ref(db,`sessions/${SESSION_ID}/chat/${recent.chatKey}`),{count,ts}).catch(()=>{});
   }else{
     const chatRef=push(ref(db,`sessions/${SESSION_ID}/chat`));
     presenceLog[key]={chatKey:chatRef.key,count:1,ts,action};
@@ -1186,33 +1405,47 @@ function playIndex(idx){
 }
 
 /* Transfer host role to another user */
+/* Note: transferHostCurrent() is what the HTML onclick calls — it reads
+   module-scoped permUid which is not accessible from inline onclick attrs */
+window.transferHostCurrent=function(){transferHost(permUid);};
 window.transferHost=function(uid){
-  if(!IS_HOST||uid===MY_ID)return;
+  if(!IS_HOST||!uid||uid===MY_ID)return;
   const l=listenersDB[uid];if(!l)return;
-  if(!confirm(`Transfer host to ${l.name}?`))return;
-  // Promote target
+  if(!confirm(`Transfer host to ${l.name||nameCache[uid]||uid}?`))return;
+  // Promote target in Firebase
   update(ref(db,`sessions/${SESSION_ID}`),{host:uid,hostLastSeen:Date.now()});
   update(ref(db,`sessions/${SESSION_ID}/listeners/${uid}`),{isHost:true});
-  // Demote self
-  IS_HOST=false;
+  // Demote self in Firebase
   update(ref(db,`sessions/${SESSION_ID}/listeners/${MY_ID}`),{isHost:false});
-  listenersDB[MY_ID].isHost=false;
+  // Update local state
+  IS_HOST=false;
+  if(listenersDB[MY_ID])listenersDB[MY_ID].isHost=false;
+  if(listenersDB[uid])listenersDB[uid].isHost=true;
   document.getElementById('top-role').textContent='Listener';
   document.getElementById('top-role').className='role-badge listener';
   closePermBtn();updatePrivUI();renderListeners();
-  showToast(`Host transferred to ${l.name}`);
+  showToast(`Host transferred to ${l.name||uid}`);
 };
 window.setVolume=v=>{if(widgetReady)widget.setVolume(Number(v));};
 window.setVolumeLocal=v=>{if(widgetReady)widget.setVolume(Number(v));};
 
 /* ── Queue ── */
-/* Normalize mobile short links: on.soundcloud.com → soundcloud.com */
+/* Normalize mobile/short SC links to standard soundcloud.com */
 function normalizeSCUrl(raw){
   let u=raw.trim();
-  // Replace mobile app share short domain
-  u=u.replace(/^https?:\/\/on\.soundcloud\.com/,'https://soundcloud.com');
+  u=u.replace(/^https?:\/\/on\.soundcloud\.com/,'https://soundcloud.com'); // app share links
+  u=u.replace(/^https?:\/\/m\.soundcloud\.com/,'https://soundcloud.com');  // mobile web links
   return u;
 }
+function isPlaylistUrl(url){
+  return /soundcloud\.com\/[^/]+\/sets\//.test(url);
+}
+
+// Show/hide playlist hint when user types
+document.getElementById('inp-url').addEventListener('input',function(){
+  const hint=document.getElementById('playlist-hint');
+  if(hint)hint.style.display=isPlaylistUrl(normalizeSCUrl(this.value))?'block':'none';
+});
 
 window.addToQueue=async function(){
   if(!canAdd())return;
@@ -1221,10 +1454,66 @@ window.addToQueue=async function(){
   url=normalizeSCUrl(url);
   if(!url.includes('soundcloud.com')){showToast('Paste a SoundCloud URL');return;}
   inp.value='';
-  const title=await resolveSCTitle(url);
-  await set(push(ref(db,`sessions/${SESSION_ID}/queue`)),{url,title,order:QUEUE.length,addedBy:MY_ID});
-  if(CURRENT_IDX<0&&canControl())setTimeout(()=>playIndex(0),200);
+  const hint=document.getElementById('playlist-hint');
+  if(hint)hint.style.display='none';
+
+  if(isPlaylistUrl(url)){
+    await importPlaylist(url);
+  }else{
+    const title=await resolveSCTitle(url);
+    await set(push(ref(db,`sessions/${SESSION_ID}/queue`)),{url,title,order:QUEUE.length,addedBy:MY_ID});
+    if(CURRENT_IDX<0&&canControl())setTimeout(()=>playIndex(0),200);
+  }
 };
+
+/* Import a SoundCloud playlist via SC Widget getSounds() */
+async function importPlaylist(playlistUrl){
+  showToast('Loading playlist…');
+  // Create a tiny hidden iframe to query the playlist
+  const tmpFrame=document.createElement('iframe');
+  tmpFrame.allow='autoplay';
+  tmpFrame.src=`https://w.soundcloud.com/player/?url=${encodeURIComponent(playlistUrl)}&auto_play=false`;
+  tmpFrame.style.cssText='position:fixed;opacity:0;pointer-events:none;width:1px;height:1px;top:-9999px;';
+  document.body.appendChild(tmpFrame);
+
+  await new Promise(res=>setTimeout(res,900)); // wait for iframe DOM init
+
+  return new Promise(resolve=>{
+    let done=false;
+    const cleanup=()=>{if(!done){done=true;tmpFrame.remove();resolve();}};
+    const timeout=setTimeout(()=>{showToast('Playlist load timed out');cleanup();},15000);
+
+    try{
+      const tmpWidget=SC.Widget(tmpFrame);
+      tmpWidget.bind(SC.Widget.Events.READY,()=>{
+        tmpWidget.getSounds(async sounds=>{
+          clearTimeout(timeout);
+          if(!sounds||!sounds.length){
+            showToast('Empty or private playlist');cleanup();return;
+          }
+          const limited=sounds.slice(0,50); // cap at 50 tracks
+          let added=0;
+          for(const sound of limited){
+            const trackUrl=sound.permalink_url;
+            if(!trackUrl)continue;
+            const title=sound.title||trackUrl;
+            await set(push(ref(db,`sessions/${SESSION_ID}/queue`)),{
+              url:trackUrl,title,order:QUEUE.length+added,addedBy:MY_ID
+            });
+            added++;
+          }
+          showToast(`Added ${added} track${added!==1?'s':''} from playlist`);
+          if(CURRENT_IDX<0&&canControl())setTimeout(()=>playIndex(0),300);
+          cleanup();
+        });
+      });
+      tmpWidget.bind(SC.Widget.Events.ERROR,()=>{
+        clearTimeout(timeout);showToast('Could not load playlist');cleanup();
+      });
+    }catch(e){clearTimeout(timeout);showToast('Playlist error');cleanup();}
+  });
+}
+
 async function resolveSCTitle(url){
   try{const r=await fetch(`https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`);const j=await r.json();return j.title||url;}catch{return url;}
 }
@@ -1336,6 +1625,7 @@ const THEMES=[
   {id:'aero',label:'Aero',tp:'tp-aero',custom:true},
   {id:'sunday',label:'Sunday Morning',tp:'tp-sunday',custom:true},
   {id:'brootal',label:'(Brootal...)',tp:'tp-brootal',custom:true},
+  {id:'soundleak',label:'SoundLeak',tp:'tp-soundleak',custom:true},
 ];
 function buildThemeGrid(){
   document.getElementById('theme-grid').innerHTML=THEMES.map(t=>`
@@ -1553,6 +1843,30 @@ async function launchApp(){
   updatePrivUI();
   if(window.innerWidth<=800){const cb=document.getElementById('panel-close-btn');if(cb)cb.style.display='block';}
   applyTheme(sessionSettings.theme);
+
+  // Volume scroll wheel: scroll over slider = adjust volume, no page scroll
+  function addVolScroll(sliderId,callback){
+    const el=document.getElementById(sliderId);if(!el)return;
+    el.addEventListener('wheel',e=>{
+      e.preventDefault();e.stopPropagation();
+      const step=e.shiftKey?1:5; // shift = fine control
+      const delta=e.deltaY<0?step:-step;
+      const next=Math.max(0,Math.min(100,Number(el.value)+delta));
+      el.value=next;
+      el.dispatchEvent(new Event('input',{bubbles:true}));
+    },{passive:false});
+  }
+  addVolScroll('vol-slider',setVolume);
+  // Also find the listener vol slider (it has no id, find by oninput attr)
+  document.querySelectorAll('input[type="range"][oninput*="setVolumeLocal"]').forEach(el=>{
+    el.addEventListener('wheel',e=>{
+      e.preventDefault();e.stopPropagation();
+      const step=e.shiftKey?1:5;
+      const delta=e.deltaY<0?step:-step;
+      const next=Math.max(0,Math.min(100,Number(el.value)+delta));
+      el.value=next;setVolumeLocal(next);
+    },{passive:false});
+  });
 }
 
 /* ── Splash ── */
